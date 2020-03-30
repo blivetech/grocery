@@ -1,0 +1,125 @@
+ion-content {
+  ion-col {
+    font-size: 12px;
+  }
+  ion-card {
+    ion-card-header {
+      font-size: 14px;
+      margin-bottom: 0;
+      margin-top: 0;
+      color: black;
+      background-color: #eee;
+      padding-top: 10px !important;
+      padding-left: 10px !important;
+      padding-right: 10px !important;
+      padding-bottom: 10px !important;
+      h4 {
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 12px;
+        font-weight: 600;
+      }
+    }
+    ion-card-content {
+      background-color: white;
+      padding-top: 10px !important;
+      padding-left: 10px !important;
+      padding-right: 10px !important;
+      padding-bottom: 10px !important;
+      font-size: 12px;
+      color: black;
+      .card-disable {
+        color: gray !important;
+      }
+      h3 {
+        font-size: 16px;
+        margin-bottom: 6px;
+
+        small {
+          font-size: 80%;
+        }
+      }
+      .item {
+        --background: transparent;
+      }
+    }
+  }
+  .row-product {
+    border-bottom: solid lightgray;
+    border-width: 0.2px;
+  }
+  ion-button {
+    margin: 0;
+  }
+
+  .braintree-paypal {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    #braintree-paypal-button {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  .braintree-card {
+    background-color: white;
+    padding: 10px;
+    margin: 10px;
+
+    .form {
+      .hosted-fields--label {
+        color: var(--ion-color-dark);
+        font-size: 14px;
+        margin-bottom: 5px;
+        display: block;
+      }
+      .hosted-field {
+        height: 40px;
+        box-sizing: border-box;
+        width: 100%;
+        padding: 6px 12px;
+        display: inline-block;
+        box-shadow: none;
+        font-weight: 600;
+        font-size: 14px;
+        border-radius: 4px;
+        border: 1px solid var(--ion-color-light);
+        line-height: 20px;
+        background-color: var(--ion-color-light);
+        margin-bottom: 10px;
+        transition: all 300ms ease-in-out;
+      }
+      .braintree-hosted-fields-focused {
+        border: 1px solid #64d18a;
+        background-position: left bottom;
+      }
+
+      .braintree-hosted-fields-invalid {
+        border: 1px solid #ed574a;
+      }
+      .button {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    }
+  }
+  .stripe-card {
+    background-color: white;
+    padding: 10px;
+    margin: 10px;
+
+    .item {
+      background-color: var(--ion-color-light);
+      margin-top: 5px;
+      //height: 20px;
+    }
+  }
+  .hidden {
+    display: none;
+  }
+
+  .button-footer {
+    height: 45px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}

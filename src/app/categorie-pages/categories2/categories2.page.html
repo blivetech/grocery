@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" *ngIf="parent.name!='Categories'">
+      <ion-back-button icon="arrow-round-back"></ion-back-button>
+    </ion-buttons>
+    <ion-menu-button slot="start" *ngIf="parent.name=='Categories'">
+      <ion-icon name="menu"></ion-icon>
+    </ion-menu-button>
+    <ion-title>
+      {{parent.name| translate }}
+    </ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-item lines="full" *ngFor="let c of getCategories()" (click)="openSubCategories(c)" class="animate-item">
+    <ion-thumbnail slot="start" class="animate-item delay-500ms">
+      <img *ngIf="c.image" src="{{config.imgUrl+c.image}}" />
+    </ion-thumbnail>
+    <ion-label class="ion-padding">
+      <ion-text>
+        <h2>{{c.name|translate}}</h2>
+        <!-- <p>{{c.total_products}} {{'Products'| translate }}</p> -->
+      </ion-text>
+    </ion-label>
+  </ion-item>
+  <div class="ion-text-center">
+    <ion-button *ngIf="parent.id!=0" icon-end clear color="secondary" (click)="viewAll()">
+      {{ 'View All' | translate }}
+      <ion-icon name="md-arrow-dropright"></ion-icon>
+    </ion-button>
+  </div>
+
+</ion-content>

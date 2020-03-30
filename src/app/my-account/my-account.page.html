@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button icon="arrow-round-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      {{'Edit Profile'| translate }}
+    </ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #userForm="ngForm" (ngSubmit)="updateInfo()">
+    <ion-item>
+      <ion-label position="floating">{{'First Name'|translate}}</ion-label>
+      <ion-input type="text" [(ngModel)]="myAccountData.customers_firstname" name="customers_firstname" required>
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">{{'Last Name'|translate}}</ion-label>
+      <ion-input type="text" [(ngModel)]="myAccountData.customers_lastname" name="customers_lastname" required>
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">{{'Mobile'|translate}}</ion-label>
+      <ion-input type="number" [(ngModel)]="myAccountData.phone" name="phone"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{'Date of Birth'|translate}}</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" max="2010" name="customers_dob"
+        [(ngModel)]="myAccountData.customers_dob"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">{{'Current Password'|translate}}</ion-label>
+      <ion-input type="password" [(ngModel)]="myAccountData.currentPassword" name="currentPassword"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">{{'New Password'|translate}}</ion-label>
+      <ion-input type="password" [(ngModel)]="myAccountData.password" name="password"></ion-input>
+    </ion-item>
+    <ion-button expand="full" color="secondary" type="submit" [disabled]="!userForm.form.valid">{{'Update'|translate}}
+    </ion-button>
+  </form>
+</ion-content>

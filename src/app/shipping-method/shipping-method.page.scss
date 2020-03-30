@@ -1,0 +1,15 @@
+
+ion-content {
+  ion-list {
+    background: #fafafa;
+    ion-item {
+      --background: #eee;
+    }
+  }
+}
+ion-footer {
+  ion-button {
+    height: 45px;
+    margin: 0;
+  }
+}

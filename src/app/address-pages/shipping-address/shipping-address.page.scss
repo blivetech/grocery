@@ -1,0 +1,26 @@
+
+ion-content {
+  p {
+    font-size: 20px;
+    text-align: center;
+  }
+  form {
+    ion-item {
+      --background: #fafafa;
+      ion-label {
+        color: gray;
+      }
+    }
+  }
+}
+
+ion-footer {
+  .toolbar {
+    padding-left: 10px;
+  }
+  ion-button {
+    height: 45px;
+    margin: 0;
+    margin-bottom: 0;
+  }
+}

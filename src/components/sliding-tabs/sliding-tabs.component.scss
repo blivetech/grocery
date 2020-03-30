@@ -1,0 +1,18 @@
+ion-segment{
+    ion-segment-button{
+        --indicator-color:lightgray;
+        --indicator-color-checked: var(--ion-color-primary);
+        --color-checked: var(--ion-color-primary);
+        font-size: 0.75rem;
+        img{
+            width: 32px;
+            height: 36px;
+            padding: 6px
+        }   
+    }
+}
+ion-grid{
+    ion-row{
+        margin-right: 10px;
+    }
+}

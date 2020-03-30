@@ -1,0 +1,4 @@
+<span *ngIf="timer">
+  <div *ngIf="timeInSeconds && timeInSeconds > 0">{{timer.displayTime}}</div>
+  <div *ngIf="!timeInSeconds || timeInSeconds == 0">Timer set up incorrectly</div>
+</span>

@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button icon="arrow-round-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      {{'News'| translate }}
+    </ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="news-page">
+  <!-- *ngIf="post.image" -->
+  <ion-slides pager=true paginationType="bullets" class="animate-item">
+    <ion-slide *ngFor="let post of featuredPosts" (click)="showPostDetail(post)">
+      <ion-img src="{{config.imgUrl+post.news_image}}" class="animate-item"></ion-img>
+    </ion-slide>
+  </ion-slides>
+  <!-- top Segments  -->
+  <ion-segment [(ngModel)]="segments">
+    <ion-segment-button value="newest">{{'Newest' |translate}}</ion-segment-button>
+    <ion-segment-button value="categories">{{ 'Categories' | translate }} </ion-segment-button>
+  </ion-segment>
+
+  <div [ngSwitch]="segments">
+
+    <div *ngSwitchCase="'newest'">
+      <ion-list>
+        <ion-item lines="full" *ngFor="let post of posts" (click)="showPostDetail(post)" class="animate-item">
+          <ion-thumbnail slot="start">
+            <ion-img src="{{config.imgUrl+post.news_image}}"></ion-img>
+          </ion-thumbnail>
+          <ion-label>
+            <h2>{{post.news_name}}
+              <br>
+              <small>
+                <ion-icon name="clock"></ion-icon>
+                <ion-label>
+                  {{post.news_date_added}}
+                </ion-label>
+              </small>
+            </h2>
+            <p [innerHTML]="post.news_description"></p>
+          </ion-label>
+        </ion-item>
+        <ion-infinite-scroll #infinite (ionInfinite)="getPosts()">
+          <ion-infinite-scroll-content></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+      </ion-list>
+    </div>
+
+    <div *ngSwitchCase="'categories'">
+      <ion-grid class="ion-no-padding" class="animate-item">
+        <ion-row>
+          <ion-col class="ion-no-padding" size="6" *ngFor="let cat of categories"
+            (click)="openPostsPage(cat.name,cat.id)">
+            <ion-card>
+              <ion-card-header>
+                <ion-img src="{{config.imgUrl+cat.image}}"></ion-img>
+              </ion-card-header>
+              <ion-card-content>
+                <ion-card-title>
+                  {{cat.name}}
+                </ion-card-title>
+                <ion-card-subtitle>
+                  {{cat.total_news}} {{'Posts'|translate}}
+                </ion-card-subtitle>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+</ion-content>

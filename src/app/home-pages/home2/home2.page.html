@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+   
+    <ion-title>
+      <ion-img src="assets/logo_header.png" alt="logo"></ion-img>
+    </ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)" class="ion-padding-bottom">
+  <app-banner></app-banner>
+  <!-- Flash sale items products -->
+
+  <div class="module" *ngIf="shared.flashSaleProducts.length!=0">
+    <ion-row class="top-icon-header">
+      <ion-button fill="clear">
+        <ion-icon slot="start" name="md-clock"></ion-icon>
+        {{'Flash Sale'|translate}}
+      </ion-button>
+    </ion-row>
+
+    <!-- recently viewed swipe slider -->
+    <ion-slides #recentSlider [options]="sliderConfig">
+      <ion-slide *ngFor="let p of shared.flashSaleProducts">
+        <app-product [data]="p" [type]="'flash'"></app-product>
+      </ion-slide>
+    </ion-slides>
+  </div>
+  <app-sliding-tabs [type]="'image'"></app-sliding-tabs>
+
+</ion-content>
+
+<ion-fab vertical="bottom" horizontal="end" *ngIf="scrollTopButton">
+  <ion-fab-button color="secondary" (click)="scrollToTop()">
+    <ion-icon name="arrow-round-up"></ion-icon>
+  </ion-fab-button>
+</ion-fab>

@@ -1,0 +1,110 @@
+<ion-header>
+  <ion-toolbar>
+   
+    <ion-title>
+      <ion-img src="assets/logo_header.png" alt="logo"></ion-img>
+    </ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)" class="ion-padding-bottom">
+
+  <app-banner></app-banner>
+  <!-- categories component -->
+  <app-categories [type]="'name&count'"></app-categories>
+  <!-- Flash sale items products -->
+
+  <div class="module" *ngIf="shared.flashSaleProducts.length!=0">
+    <ion-row class="top-icon-header">
+      <ion-button fill="clear">
+        <ion-icon slot="start" name="md-clock"></ion-icon>
+        {{'Flash Sale'|translate}}
+      </ion-button>
+    </ion-row>
+
+    <ion-slides [options]="sliderConfig">
+      <ion-slide *ngFor="let p of shared.flashSaleProducts">
+        <app-product [data]="p" [type]="'flash'"></app-product>
+      </ion-slide>
+    </ion-slides>
+  </div>
+  
+  <ion-segment [(ngModel)]="segments">
+    <ion-segment-button value="topSeller">{{ 'Top Seller' | translate }}</ion-segment-button>
+    <ion-segment-button value="deals">{{ 'Deals' | translate }} </ion-segment-button>
+    <ion-segment-button value="mostLiked"> {{ 'Most Liked' | translate }}</ion-segment-button>
+  </ion-segment>
+  <div [ngSwitch]="segments">
+
+    <!-- first swipe slider -->
+    <ion-slides *ngSwitchCase="'topSeller'" [options]="sliderConfig">
+      <ion-slide *ngFor="let p of shared.tab1">
+        <app-product [data]="p" [type]="'normal'"></app-product>
+      </ion-slide>
+      <ion-slide>
+        <ion-button fill="clear" (click)="openProducts('top seller')"> {{'Shop More'| translate}}
+          <ion-icon name="arrow-dropright"></ion-icon>
+        </ion-button>
+      </ion-slide>
+    </ion-slides>
+
+    <!-- 2nd swipe slider -->
+    <ion-slides *ngSwitchCase="'deals'" [options]="sliderConfig">
+      <ion-slide *ngFor="let p of shared.tab2">
+        <app-product [data]="p" [type]="'normal'"></app-product>
+      </ion-slide>
+      <ion-slide>
+        <ion-button fill="clear" (click)="openProducts('special')"> {{'Shop More'| translate}}
+          <ion-icon name="arrow-dropright"></ion-icon>
+        </ion-button>
+      </ion-slide>
+    </ion-slides>
+
+    <!-- 3rd swipe slider -->
+    <ion-slides *ngSwitchCase="'mostLiked'" [options]="sliderConfig">
+      <ion-slide *ngFor="let p of shared.tab3">
+        <app-product [data]="p" [type]="'normal'"></app-product>
+      </ion-slide>
+      <ion-slide>
+        <ion-button fill="clear" (click)="openProducts('most liked')"> {{'Shop More'| translate}}
+          <ion-icon name="arrow-dropright"></ion-icon>
+        </ion-button>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <!-- For Vendor List -->
+  <!--<app-vendor-list></app-vendor-list>-->
+
+  <ion-row class="top-icon-header">
+    <ion-button fill="clear">
+      <ion-icon slot="start" name="md-albums"></ion-icon>
+      {{'All Products' | translate }}
+    </ion-button>
+    <ion-button id="second" fill="clear" (click)="openProducts('top seller')">
+      <ion-icon slot="end" name="arrow-dropright"></ion-icon>
+      {{ 'Shop More' | translate }}
+    </ion-button>
+  </ion-row>
+
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-no-padding">
+      <ion-col *ngFor="let p of products" size="6" class="ion-no-padding">
+        <app-product [data]="p" [type]="'normal'"></app-product>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- infinite scroll -->
+  <ion-infinite-scroll #infinite (ionInfinite)="getProducts()">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+
+</ion-content>
+<ion-fab vertical="bottom" horizontal="end" *ngIf="scrollTopButton">
+  <ion-fab-button color="secondary" (click)="scrollToTop()">
+    <ion-icon name="arrow-round-up"></ion-icon>
+  </ion-fab-button>
+</ion-fab>

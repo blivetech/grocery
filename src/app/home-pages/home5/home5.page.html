@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+   
+    <ion-title>
+      <ion-img src="assets/logo_header.png" alt="logo"></ion-img>
+    </ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-bottom">
+  <ion-list>
+    <ion-card *ngFor="let c of shared.categories" (click)="openSubCategories(c)" class="animate-item">
+      <ion-img *ngIf="c.image" src="{{config.imgUrl+c.image}}"></ion-img>
+      <ion-text>
+        <h2>{{c.name }}</h2>
+        <p>{{c.total_products}} {{'Products'| translate }}</p>
+      </ion-text>
+    </ion-card>
+  </ion-list>
+</ion-content>

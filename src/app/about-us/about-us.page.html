@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button icon="arrow-round-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      {{"About Us"|translate}}
+    </ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-text class="ion-no-padding">
+    <p [innerHTML]="shared.aboutUs">
+    </p>
+  </ion-text>
+  <ion-list>
+    <ion-item (click)="openSite()" lines="full">
+      {{"Official Website"|translate}}
+      <ion-icon name="arrow-forward" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item (click)="showModal('privacyPolicy')" lines="full">
+      {{'Privacy Policy'|translate}}
+      <ion-icon name="arrow-forward" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item (click)="showModal('refundPolicy')" lines="full">
+      {{'Refund Policy'|translate}}
+      <ion-icon name="arrow-forward" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item (click)="showModal('termServices')" lines="none">
+      {{'Term and Services'|translate}}
+      <ion-icon name="arrow-forward" slot="end"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>

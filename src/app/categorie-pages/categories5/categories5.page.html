@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+   
+    <ion-title>
+      {{"Categories"| translate }}
+    </ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item-group *ngFor="let c of shared.categories" class="animated fadeIn">
+    <ion-item-divider (click)="viewAll(c)">
+      <ion-avatar slot="end">
+        <img *ngIf="c.image" src="{{config.imgUrl+c.image}}" />
+      </ion-avatar>
+      <ion-label class="ion-padding">
+        <ion-text>
+          <h2>{{c.name}}</h2>
+        </ion-text>
+      </ion-label>
+    </ion-item-divider>
+    <div *ngFor="let s of shared.subCategories">
+      <ion-item *ngIf="c.id==s.parent_id" (click)="viewAll(s)">
+        <ion-avatar slot="end">
+          <img *ngIf="s.image" src="{{config.imgUrl+s.image}}" />
+        </ion-avatar>
+        <ion-label class="ion-padding">
+          <ion-text>
+            <h2>{{s.name|translate}}</h2>
+            <!-- <p>{{s.total_products}} {{'Products'| translate }}</p> -->
+          </ion-text>
+        </ion-label>
+      </ion-item>
+    </div>
+  </ion-item-group>
+</ion-content>

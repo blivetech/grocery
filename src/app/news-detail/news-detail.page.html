@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button icon="arrow-round-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+        {{post.news_name}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-img src="{{config.imgUrl+post.news_image}}" ></ion-img>
+
+  <h2>{{post.news_name}}
+    <br>
+    <small>
+      <ion-icon name="clock"></ion-icon>{{post.news_date_added }}
+    </small>
+  </h2>
+  <p [innerHTML]="post.news_description"></p>
+</ion-content>

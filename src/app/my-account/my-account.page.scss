@@ -1,0 +1,38 @@
+ion-header{
+    ion-toolbar{
+        --background: var(--ion-color-primary);
+        --color:white;
+        ion-title{
+            ion-img{
+                height: 25px;
+            }
+        }
+        ion-buttons{
+            ion-icon{
+                zoom: 1.3;
+            }
+            ion-badge{
+                position: absolute;
+                right: 3px;
+                bottom: 12px;
+            }
+        }
+    }
+}
+form{
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 12px;
+    ion-item{
+        --padding-start: 0;
+        --background: #fafafa;
+        ion-label{
+            color: gray;
+        }
+    }
+    ion-button{
+        --background: #557f5f;
+        text-transform: uppercase;
+        color: #fafafa;
+    }
+}

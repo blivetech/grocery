@@ -1,0 +1,33 @@
+ion-content{
+    .swiper-slide {
+        width: 40%;
+      }
+    ion-item{
+            --inner-padding-end: 0;
+            --padding-start: 4px;
+            padding-top: 3px;
+            margin-bottom: -15px;
+            ion-icon{
+                margin-right: 5px;
+                zoom: 0.9;
+                color: #51698f;
+            }
+            ion-label{
+                p{
+                font-size: 13.5px;
+            }
+        }
+        ion-button{
+            color: #557f5f;
+        }
+    }
+    app-product{
+        width: 100%;
+    }
+    ion-fab{
+        position: fixed;
+        ion-fab-button{
+            --background: #51698f;
+        }
+    }
+}

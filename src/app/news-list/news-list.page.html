@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button icon="arrow-round-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      {{name}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="news-list-page">
+  <ion-list>
+    <ion-item lines="full" *ngFor="let post of posts" (click)="showPostDetail(post)" class="animate-item">
+      <ion-thumbnail slot="start">
+        <ion-img src="{{config.imgUrl+post.news_image}}"></ion-img>
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{post.news_name}}
+          <br>
+          <small>
+            <ion-icon name="clock"></ion-icon>
+            <ion-label>
+                {{post.news_date_added}}
+            </ion-label>
+          </small>
+        </h2>
+        <p [innerHTML]="post.news_description"></p>
+      </ion-label>
+    </ion-item>
+    <ion-infinite-scroll #infinite (ionInfinite)="getPosts()">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-list>
+</ion-content>

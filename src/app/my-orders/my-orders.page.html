@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button icon="arrow-round-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title> {{'Custom Orders'| translate }} </ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="refreshPage()">
+        <ion-icon name="refresh"></ion-icon>
+      </ion-button>
+
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-no-padding grid" *ngIf="orders.length==0 && httpRunning==false">
+    <ion-row class="ion-no-padding">
+      <ion-col size="12" class="ion-no-padding">
+        <ion-icon name="briefcase"></ion-icon>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-no-padding">
+      <ion-col size="12" class="ion-no-padding">
+        <h4>{{'Your Order List is Empty'|translate}}</h4>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-no-padding">
+      <ion-col size="12" class="ion-no-padding">
+        <h5>{{'continue shopping'|translate}}</h5>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-no-padding">
+      <ion-col size="12" class="ion-no-padding">
+        <ion-button (click)="openProductsPage()">{{'Explore'|translate}}</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-card *ngFor="let order of orders" (click)="showOrderDetail(order)">
+      <ion-card-content>
+        <ion-row>
+          <ion-col size="6">
+            {{'Orders ID'|translate}}
+          </ion-col>
+          <ion-col class="ion-text-right" col-6>
+            {{'#'+order.orders_id}}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+            {{'Date'|translate}}
+          </ion-col>
+          <ion-col class="ion-text-right" size="6">
+            {{order.last_modified}}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+            {{'Price'|translate}}
+          </ion-col>
+          <ion-col class="ion-text-right" size="6">
+            {{order.order_price|curency}}
+          </ion-col>
+        </ion-row>
+        <ion-row [class.pending]="order.orders_status=='Pending'" [class.cancel]="order.orders_status=='Cancel'"
+          [class.inprocess]="order.orders_status=='In Process'" [class.complete]="order.orders_status=='Completed'">
+          <ion-col size="6">
+            {{'Status'|translate}}
+          </ion-col>
+          <ion-col class="ion-text-right" size="6">
+            <strong>{{order.orders_status}}</strong>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </ion-grid>
+  <!-- <ion-infinite-scroll #infinite (ionInfinite)="getOrders()">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll> -->
+</ion-content>

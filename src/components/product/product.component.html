@@ -1,0 +1,103 @@
+<div class="product-component animate-item">
+  <!-- skeleton text until data not loaded -->
+  <div *ngIf="p==1" style="padding-left: 10px;">
+    <ion-skeleton-text animated style="width: 100%; height: 110px;"></ion-skeleton-text>
+    <ion-skeleton-text animated style="width: 80%; height: 15px;"></ion-skeleton-text>
+    <ion-skeleton-text animated style="width: 60%; height: 15px;">
+    </ion-skeleton-text>
+    <ion-skeleton-text animated *ngIf="config.cartButton==1" style="width: 100%; height: 25px;">
+    </ion-skeleton-text>
+
+  </div>
+
+  <div *ngIf="p!=1">
+
+    <ion-card *ngIf="type=='normal' || type=='recent' || type=='wishList' || type=='flash'" class="animated fadeIn">
+      <div>
+        <div *ngIf="p.discount_price!=null">{{pDiscount()}} {{'OFF'|translate}}</div>
+      </div>
+      <ion-img id="newimage" src="assets/badge_new.png" *ngIf="checkProductNew()"></ion-img>
+      <img id="image" src="{{config.imgUrl+p.products_image}}" (click)="showProductDetail()">
+      <p (click)="showProductDetail()">{{p.products_name}}</p>
+      <ion-row class="ion-no-padding">
+        <ion-col size="10" class="ion-no-padding" *ngIf="type!='flash'">
+          <h4 class="card-price-normal" *ngIf="p.discount_price==null">{{p.products_price|curency}}</h4>
+          <h4 class="card-price-normal-through" *ngIf="p.discount_price!=null">{{p.products_price|curency}}</h4>
+          <h4 class="card-price-normal" *ngIf="p.discount_price!=null">{{p.discount_price|curency}}</h4>
+        </ion-col>
+        <ion-col size="10" class="ion-no-padding" *ngIf="type=='flash'">
+          <h4 class="card-price-normal-through">{{p.products_price|curency}}</h4>
+          <h4 class="card-price-normal">{{p.flash_price|curency}}</h4>
+        </ion-col>
+        <ion-col size="2" class="ion-text-center ion-no-padding">
+          <ion-icon (click)="clickWishList()" *ngIf="p.isLiked=='0'" name="heart-empty"></ion-icon>
+          <ion-icon (click)="clickWishList()" *ngIf="p.isLiked!='0'" name="heart"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-no-padding">
+        <ion-button *ngIf="type=='recent'" color="danger" (click)="removeRecent()">{{'REMOVE'|translate}}</ion-button>
+        <ion-button *ngIf="type=='wishList'" color="danger" (click)="removeWishList()">{{'REMOVE'|translate}}
+        </ion-button>
+      </ion-row>
+      <ion-row class="ion-no-padding" *ngIf="type=='normal'">
+        <ion-button color="secondary" *ngIf="config.cartButton==1 && p.defaultStock>0 && p.products_type==0"
+          (click)="addToCart(p)">{{'ADD TO CART'|translate}}
+        </ion-button>
+        <ion-button color="secondary" (click)="showProductDetail()" *ngIf="config.cartButton==1 && p.products_type!=0">
+          {{'DETAILS'|translate}}
+        </ion-button>
+        <ion-button color="secondary" color="danger"
+          *ngIf="config.cartButton==1 && p.defaultStock<=0 && p.products_type==0">
+          {{'OUT OF STOCK'|translate}}
+        </ion-button>
+      </ion-row>
+
+      <ion-row class="ion-no-padding" *ngIf="type=='flash'">
+        <ion-button color="secondary" *ngIf="!is_upcomming">
+          <app-timer [data]="p"></app-timer>
+        </ion-button>
+        <ion-button color="secondary" *ngIf="is_upcomming" (click)="showProductDetail()">{{'Up Coming'|translate}}
+        </ion-button>
+      </ion-row>
+      <ion-row class="card-add-cart" *ngIf="isInCart()" (click)="showProductDetail()">
+        <ion-icon name="checkmark-circle"></ion-icon>
+      </ion-row>
+    </ion-card>
+
+    <!-- //====================================  list view for shop page ==================================== -->
+    <ion-item lines="none" *ngIf="type=='list'" class="animate-item">
+      <ion-thumbnail slot="start">
+        <ion-img class="badge-img" src="assets/badge_new.png" *ngIf="checkProductNew()"></ion-img>
+        <img src="{{config.imgUrl+p.products_image}}" (click)="showProductDetail()">
+      </ion-thumbnail>
+      <ion-label>
+        <p (click)="showProductDetail()">{{p.products_name}}</p>
+        <p class="list-price-normal" *ngIf="p.discount_price==null">{{p.products_price|curency}}</p>
+        <p class="list-price-normal" *ngIf="p.discount_price!=null"><span class="list-price-normal-through"
+            *ngIf="p.discount_price!=null">{{p.products_price|curency}}</span>{{p.discount_price|curency}}</p>
+        <ion-row>
+          <ion-col>
+            <ion-button color="secondary" *ngIf="config.cartButton==1 && p.defaultStock>0 && p.products_type==0"
+              (click)="addToCart(p)" item-start>{{'ADD TO CART'|translate}}</ion-button>
+            <ion-button color="secondary" (click)="showProductDetail()"
+              *ngIf="config.cartButton==1 && p.products_type!=0" item-start>
+              {{'DETAILS'|translate}}</ion-button>
+            <ion-button color="danger" *ngIf="config.cartButton==1 && p.defaultStock<=0 && p.products_type==0"
+              item-start>
+              {{'OUT OF STOCK'|translate}}</ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-icon id="list-heart-icon" *ngIf="p.isLiked=='0'" (click)="clickWishList()" name="heart-empty"></ion-icon>
+        <ion-icon id="list-heart-icon" *ngIf="p.isLiked!='0'" (click)="clickWishList()" name="heart"></ion-icon>
+      </ion-label>
+
+      <div class="img-div">
+        <div *ngIf="p.discount_price!=null" class="sale">{{pDiscount()}}<br>{{'OFF'|translate}}</div>
+      </div>
+      <ion-row class="card-add-cart" *ngIf="isInCart()" (click)="showProductDetail()">
+        <ion-icon name="checkmark-circle"></ion-icon>
+      </ion-row>
+    </ion-item>
+  </div>
+
+</div>

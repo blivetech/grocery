@@ -1,0 +1,15 @@
+
+ion-content{
+    p{
+        font-size: 20px;
+        text-align: center;
+    }
+    form{
+        ion-item{
+            --background: #fafafa;
+            ion-label{
+                color: gray;
+            }
+        }
+    }
+}

@@ -1,0 +1,22 @@
+ion-content {
+  ion-item {
+    --padding-start: 0;
+    ion-thumbnail {
+      height: 140px;
+      width: 25%;
+      margin: 0;
+    }
+    ion-label {
+      h2 {
+        font-size: var(--heading-font-size);
+        font-weight: 400;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      p {
+        font-size: var(--sub-heading-font-size);
+      }
+    }
+  }
+}

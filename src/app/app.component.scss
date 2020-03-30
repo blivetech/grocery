@@ -1,0 +1,105 @@
+
+
+ion-content {
+  .nameTextAvatar{
+    width: 50px;
+    height: 50px;
+  }
+  ion-list {
+    ion-item {
+      --inner-padding-end: 0;
+      ion-menu-toggle {
+        width: 100%;
+      }
+      &:first-child {
+        --inner-padding-end: 0;
+        --padding-start: 0;
+        height: 100px;
+        ion-img {
+          position: fixed;
+          opacity: 0.3;
+        }
+        div {
+          background: var(--ion-color-primary);
+          width: 100%;
+          height: 100px;
+        }
+        ion-item {
+          position: absolute;
+          --background: transparent;
+          --color: white;
+          ion-label {
+            h2 {
+              font-weight: bold;
+            }
+            p {
+              color: white;
+              white-space: normal;
+            }
+          }
+        }
+      }
+      ion-grid {
+        ion-row {
+          border-bottom: solid lightgray;
+          border-width: 0.4px;
+          height: 47px;
+          ion-icon {
+            zoom: 1.2;
+          }
+          img {
+            max-width: 60%;
+          }
+          ion-col {
+            p {
+              margin-top: 6px !important;
+              margin-bottom: 6px !important;
+            }
+            &:first-child {
+              text-align: right;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.item-inner-list {
+  height: 52px !important;
+  margin-left: -3px !important;
+  --inner-padding-end: 0 !important;
+  --padding-start: 0 !important;
+  ion-row {
+    padding-left: 0 !important;
+  }
+  &:last-child {
+    border-bottom: none;
+  }
+}
+.col-text {
+  padding-left: 16px !important;
+}
+
+.primary-light-Color {
+  color: var(--ion-color-primary-light);
+  display: none;
+}
+
+.primary-Color {
+  color: var(--ion-color-primary);
+  display: none;
+}
+#nametext {
+  width: 50px;
+  height: 50px;
+  border-radius: 100px;
+  background: var(--ion-color-secondary);
+  text-align: center;
+  color: white;
+  font-size: 25px;
+  line-height: 44px;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+

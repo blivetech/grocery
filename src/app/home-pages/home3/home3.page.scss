@@ -1,0 +1,17 @@
+ion-content {
+  background-color: #f4f4f4;
+  .swiper-slide {
+    max-width: 40%;
+  }
+  ion-slides {
+    ion-slide {
+      &:last-child {
+        height: auto;
+      }
+    }
+  }
+
+  app-product {
+    width: 100%;
+  }
+}

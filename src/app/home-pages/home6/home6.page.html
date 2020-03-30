@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar>
+   
+    <ion-title>
+      <ion-img src="assets/logo_header.png" alt="logo"></ion-img>
+    </ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-bottom">
+  <app-banner></app-banner>
+  <!-- Flash sale items products -->
+
+  <div class="module" *ngIf="shared.flashSaleProducts.length!=0">
+    <ion-row class="top-icon-header">
+      <ion-button fill="clear">
+        <ion-icon slot="start" name="md-clock"></ion-icon>
+        {{'Flash Sale'|translate}}
+      </ion-button>
+    </ion-row>
+
+    <ion-slides [options]="sliderConfig">
+      <ion-slide *ngFor="let p of shared.flashSaleProducts">
+        <app-product [data]="p" [type]="'flash'"></app-product>
+      </ion-slide>
+    </ion-slides>
+  </div>
+  <!-- categories swipe slider -->
+  <ion-row class="top-icon-header">
+    <ion-button fill="clear">
+      <ion-icon slot="start" name="apps"></ion-icon>
+      {{'Categories' | translate }}
+    </ion-button>
+    <ion-button id="second" fill="clear" (click)="openCategoryPage()">
+      <ion-icon slot="end" name="arrow-dropright"></ion-icon>
+      {{ 'Shop More' | translate }}
+    </ion-button>
+  </ion-row>
+  <!-- categories component -->
+  <app-categories [type]="'withName'"></app-categories>
+  <!-- On Sale Header -->
+  <ion-row class="top-icon-header">
+    <ion-button fill="clear">
+      <ion-icon slot="start" name="md-bookmark"></ion-icon>
+      {{'Deals' | translate }}
+    </ion-button>
+    <ion-button id="second" fill="clear" (click)="openProducts('special')">
+      <ion-icon slot="end" name="arrow-dropright"></ion-icon>
+      {{ 'Shop More' | translate }}
+    </ion-button>
+  </ion-row>
+  <!-- On Sale Products swipe slider -->
+  <ion-slides [options]="sliderConfig">
+    <ion-slide *ngFor="let p of shared.tab2">
+      <app-product [data]="p" [type]="'normal'"></app-product>
+    </ion-slide>
+  </ion-slides>
+  <!-- For Vendor List -->
+  <!--<app-vendor-list></app-vendor-list>-->
+  <!-- banner image -->
+  <ion-img *ngIf="shared.banners.length!=0" src="{{config.imgUrl+shared.banners[shared.banners.length-1].image}}"></ion-img>
+  <!-- All Products Header -->
+  <ion-row class="top-icon-header">
+    <ion-button fill="clear">
+      <ion-icon slot="start" name="md-albums"></ion-icon>
+      {{'Most Liked' | translate }}
+    </ion-button>
+    <ion-button id="second" fill="clear" (click)="openProducts('most liked')">
+      <ion-icon slot="end" name="arrow-dropright"></ion-icon>
+      {{ 'Shop More' | translate }}
+    </ion-button>
+  </ion-row>
+  <!-- scrolling products component -->
+  <app-scrolling-featured-products></app-scrolling-featured-products>
+
+  <!-- fab button to move at top of page  -->
+
+</ion-content>
+<ion-fab vertical="bottom" horizontal="end" *ngIf="scrollTopButton">
+  <ion-fab-button (click)="scrollToTop()">
+    <ion-icon name="arrow-round-up"></ion-icon>
+  </ion-fab-button>
+</ion-fab>

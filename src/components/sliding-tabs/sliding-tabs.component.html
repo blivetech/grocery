@@ -1,0 +1,33 @@
+<!-- Home-1 For Segments With Not Image -->
+<ion-segment *ngIf="type!='image'" [(ngModel)]="selected" scrollable>
+  <ion-segment-button value="0" (click)="changeTab('0')">{{'All'|translate}}</ion-segment-button>
+  <ion-segment-button value="{{c.id}}" *ngFor="let c of shared.allCategories" (click)="changeTab(c)">{{c.name}}
+  </ion-segment-button>
+
+
+</ion-segment>
+
+<!-- Home-2 For Segments With Image -->
+<ion-segment *ngIf="type=='image'" [(ngModel)]="selected" scrollable>
+  <ion-segment-button value="0" (click)="changeTab('0')">
+    <img src="assets/home-page/category.png">
+    {{'All'|translate}}</ion-segment-button>
+  <ion-segment-button value="{{c.id}}" *ngFor="let c of shared.allCategories" (click)="changeTab(c)">
+    <img *ngIf="c.image" src="{{config.imgUrl+c.icon}}">
+    {{c.name}} </ion-segment-button>
+</ion-segment>
+
+<!-- scrollable segment divisions -->
+<div [ngSwitch]="selected">
+</div>
+<ion-grid class="ion-no-padding">
+  <ion-row class="ion-no-padding">
+    <ion-col *ngFor="let p of products" size="6" class="ion-no-padding">
+      <app-product [data]="p" [type]="'normal'"></app-product>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<!-- infinite scroll -->
+<ion-infinite-scroll threshold="10px" #infinite (ionInfinite)="getProducts($event)">
+  <ion-infinite-scroll-content></ion-infinite-scroll-content>
+</ion-infinite-scroll>

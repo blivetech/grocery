@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+   
+    <ion-title>
+      {{'Wish List'| translate }}
+    </ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-no-padding top-margin" *ngIf="shared.wishList.length == 0 && httpRunning==false">
+    <ion-row class="ion-no-padding">
+      <ion-col size="12" class="ion-no-padding">
+        <ion-icon name="heart"></ion-icon>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-no-padding">
+      <ion-col size="12" class="ion-no-padding">
+        <h4>{{'Your Wishlist is empty'|translate}}</h4>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-no-padding">
+      <ion-col size="12" class="ion-no-padding">
+        <ion-button (click)="openProductsPage()">{{'Explore'|translate}}</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-no-padding">
+      <ion-col *ngFor="let p of shared.wishList" size="6" class="ion-no-padding">
+        <app-product [data]="p" [type]="'wishList'"></app-product>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- infinite scroll -->
+  <ion-infinite-scroll threshold="10px" #infinite (ionInfinite)="getProducts()">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

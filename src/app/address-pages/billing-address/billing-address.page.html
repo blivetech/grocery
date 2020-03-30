@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button icon="arrow-round-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title> {{'Billing Address'| translate }} </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form #loginForm="ngForm">
+    <ion-item>
+      <ion-label position="floating">{{'First Name'|translate}}</ion-label>
+      <ion-input type="text" name="shipping_firstname" [(ngModel)]="shared.orderDetails.billing_firstname" required>
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">{{'Last Name'|translate}}</ion-label>
+      <ion-input type="text" name="shipping_lastname" [(ngModel)]="shared.orderDetails.billing_lastname" required>
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">{{'Address'|translate}}</ion-label>
+      <ion-input type="text" name="address" [(ngModel)]="shared.orderDetails.billing_street_address" required>
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">{{'Country'|translate}}</ion-label>
+      <ion-input type="text" name="shipping_country" tappable (click)="selectCountryPage()" readonly
+        [(ngModel)]="shared.orderDetails.billing_country" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">{{'State'|translate}}</ion-label>
+      <ion-input type="text" required name="shipping_zone" tappable (click)="selectZonePage()" readonly
+        [(ngModel)]="shared.orderDetails.billing_zone"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">{{'City'|translate}}</ion-label>
+      <ion-input type="text" name="shipping_city" [(ngModel)]="shared.orderDetails.billing_city" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">{{'Post code'|translate}}</ion-label>
+      <ion-input type="text" name="shipping_postcode" [(ngModel)]="shared.orderDetails.billing_postcode" required>
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">{{'Phone'|translate}}</ion-label>
+      <ion-input type="tel" name="Phone" [(ngModel)]="shared.orderDetails.billing_phone" required></ion-input>
+    </ion-item>
+  </form>
+  <ion-item>
+    <ion-label>{{'Same as Shipping Address'|translate}}</ion-label>
+    <ion-checkbox [(ngModel)]="defaultAddress" (ionChange)="setAddress(defaultAddress)"></ion-checkbox>
+  </ion-item>
+</ion-content>
+
+<ion-footer>
+  <ion-button expand="full" color="secondary" (click)="submit()" [disabled]="!loginForm.form.valid">{{'Next'|translate}}
+  </ion-button>
+</ion-footer>

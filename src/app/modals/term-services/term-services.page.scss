@@ -1,0 +1,17 @@
+ion-header{
+    ion-toolbar{
+        --background: var(--ion-color-primary);
+        --color:white;
+        ion-icon{
+            zoom: 1.4;
+        }
+    }
+}
+ion-content{
+    ion-text{
+        p{
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    }
+}

@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> {{'My Cart'| translate }} </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid class="ion-no-padding grid-empty" *ngIf="shared.cartProducts.length==0">
+    <ion-row class="ion-no-padding">
+      <ion-col size="12" class="ion-no-padding">
+        <ion-icon name="basket"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-no-padding">
+      <ion-col size="12" class="ion-no-padding">
+        <h4>{{'Your cart is empty'|translate}}</h4>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-no-padding">
+      <ion-col size="12" class="ion-no-padding">
+        <h5>{{'continue shopping'|translate}}</h5>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-no-padding">
+      <ion-col size="12" class="ion-no-padding">
+        <ion-button color="secondary" (click)="openProductsPage()">{{'Explore'|translate}}</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-card class="ion-padding" *ngFor="let product of shared.cartProducts">
+    <ion-card-header class="ion-no-padding">
+      <ion-card-subtitle>
+        <h3> {{product.products_name}}
+        </h3>
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid class="ion-no-padding">
+        <ion-row>
+          <ion-col size="3">
+            <ion-img src="{{config.imgUrl+product.image}}"></ion-img>
+          </ion-col>
+          <ion-col class="col-price" size="5">
+            <p>{{'Price' |translate}}</p>
+            <p>{{'Quantity' |translate}}</p>
+            <p><b>{{'Sub Total' |translate}}</b></p>
+          </ion-col>
+          <ion-col class="col-price-ori" size="4">
+            <p class="para-del">{{product.price| curency}}</p>
+            <div class="div-btn">
+              <ion-button size="small" fill="outline" (click)="qunatityMinus(product)">
+                <p>-</p>
+              </ion-button>
+              <span>{{product.customers_basket_quantity}}</span>
+              <ion-button class="add-btn" size="small" fill="outline" (click)="qunatityPlus(product)">
+                <p>+</p>
+              </ion-button>
+            </div>
+            <br /><br />
+            <p class="para-price-ori">{{product.total | curency}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngFor="let att of product.attributes">
+          <ion-col size="6">{{att.products_options_values+'&nbsp;'+att.products_options}}&nbsp;:</ion-col>
+          <ion-col size="6">{{att.price_prefix +'&nbsp;'+ att.options_values_price+'&nbsp;'+config.currency}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="2.5">
+            <ion-button color="secondary" (click)="getSingleProductDetail(product.products_id)">{{'View' | translate}}
+            </ion-button>
+          </ion-col>
+          <ion-col size="8.5">
+            <ion-button fill="clear" color="danger" (click)="removeCart(product.cart_id);">{{'Remove' | translate}}
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="shared.cartProducts.length!=0" class="ion-padding">
+    <ion-card-content>
+      <ion-row>
+        <ion-col size="6">
+          <strong> {{'Total'|translate}}</strong>
+        </ion-col>
+        <ion-col size="6" class="ion-text-right">
+          <strong>{{total| curency}}</strong>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer *ngIf="shared.cartProducts.length!=0">
+  <ion-button expand="full" solid block color="secondary" (click)="proceedToCheckOut()">
+    {{'Proceed'|translate}}
+  </ion-button>
+</ion-footer>
