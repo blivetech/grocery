@@ -4,7 +4,7 @@
 </div>
 <div *ngIf=" shared.banners.length!=0">
 
-  <ion-slides pager="true" #ionSlides class="banner-slider">
+  <ion-slides [options]="slideOptsOne" pager="true" #ionSlides class="banner-slider">
     <ion-slide *ngFor="let b of shared.banners" class="ion-no-padding animate-item" (click)="bannerClick(b)">
       <ion-img src="{{config.imgUrl+b.image}}"></ion-img>
     </ion-slide>

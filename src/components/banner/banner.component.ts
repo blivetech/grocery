@@ -12,7 +12,13 @@ import { NavigationExtras } from '@angular/router';
   styleUrls: ['./banner.component.scss'],
 })
 export class BannerComponent implements OnInit {
+  slideOptsOne = {
+    initialSlide: 0,
+    slidesPerView: 1,
+    autoplay:true,
+    speed: 2000,
 
+   };
   constructor(
     public shared: SharedDataService,
     public navCtrl: NavController,
