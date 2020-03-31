@@ -1,4 +1,7 @@
+
 :root {
+  --ion-font-family: 'My Custom Font';
+
   --ion-color-primary: #ff6347;
   --ion-color-primary-rgb: 81,104,143;
   --ion-color-primary-contrast: #ffffff;
@@ -61,13 +64,15 @@
   --ion-color-light-contrast-rgb: 0,0,0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+ // --ion-font-family: 'Poppins-Regular';
 }
-:root {
-  font-size: 16px;
-  --accent-color: #dddddd;
-  --heading-font-size: 0.8rem;
-  --sub-heading-font-size: 0.6875rem;
-  --ion-color-facebook: #3b5998;
-}
+
 //==================================== global css ==================================
 
+@font-face {
+  font-family: 'Poppins-Regular';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../assets/fonts/myCustomFont/Muli_Regular.ttf');
+}

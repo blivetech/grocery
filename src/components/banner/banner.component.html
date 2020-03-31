@@ -4,10 +4,21 @@
 </div>
 <div style="border-radius: 16px;">
 <div  *ngIf=" shared.banners.length!=0">
-  <ion-slides [options]="slideOptsOne" pager="true" #ionSlides class="banner-slider">
+  <!-- <ion-slides [options]="slideOptsOne" pager="true" #ionSlides class="banner-slider">
     <ion-slide  *ngFor="let b of shared.banners" class=" animate-item" (click)="bannerClick(b)">
       <ion-img  src="{{config.imgUrl+b.image}}" ></ion-img>
     </ion-slide>
-  </ion-slides>
+  </ion-slides> -->
+
+  <ion-slides [options]="slideOptsOne" pager="true"  #ionSlides class="banner-slider">
+    <ion-slide *ngFor="let b of shared.banners" >
+      <ion-card class="home-slide">
+        <ion-card-content class="slide-content">
+          <!-- <ion-img src="item.banner_image"></ion-img> -->
+          <img src="{{config.imgUrl+b.image}}" alt="Image not loading">
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+   </ion-slides>
 </div>
 </div>

@@ -1,53 +1,32 @@
-<ion-header>
-  <ion-toolbar>
-   
-    <ion-title>
-      <!-- <ion-img src="assets/logo_header.png" alt="logo"></ion-img> -->
-    </ion-title>
-    
-  </ion-toolbar>
-</ion-header>
 <ion-content class="ion-padding-bottom ">
+  <h2 style="margin: 15px;font-weight: 700;">Home</h2>
+  <form #loginForm="ngForm" (ngSubmit)="getSearchData()">
+    <ion-searchbar [(ngModel)]="search" name="search" placeholder="{{'Search'|translate}}"
+      (ionInput)="onChangeKeyword($event)">
+    </ion-searchbar>
+  </form>
 
   <app-banner></app-banner>
 
   <!-- Flash sale items products -->
-    <h5  style="text-align: center; margin: 10px;" >
-      Shop by catrgory
-    </h5>
-    <!-- <ion-button id="second" fill="clear" (click)="openCategoryPage()">
-      <ion-icon slot="end" name="arrow-dropright"></ion-icon>
-      {{ 'Shop More' | translate }}
-    </ion-button> -->
-  <!-- categories component -->
+  <h4 style="text-align: center; margin: 10px; font-weight: bold;">
+    Shop by catrgory
+  </h4>
   <app-categories [type]="'grid'"></app-categories>
 
   <div class="module" *ngIf="shared.flashSaleProducts.length!=0">
-    <ion-row >
-      <!-- <ion-button fill="clear"> -->
-        <!-- <ion-icon slot="start" name="md-clock"></ion-icon>
+      <h4 style="text-align: center; margin: 10px; font-weight: bold;">
         {{'Flash Sale'|translate}}
-      </ion-button> -->
-      <h5  style="text-align: center; margin: 10px;" >
-        {{'Flash Sale'|translate}}
-      </h5>
-    </ion-row>
+      </h4>
     <ion-slides [options]="sliderConfig">
       <ion-slide *ngFor="let p of shared.flashSaleProducts">
         <app-product [data]="p" [type]="'flash'"></app-product>
       </ion-slide>
     </ion-slides>
   </div>
-  <ion-row>
-    <!-- <ion-button fill="clear"> -->
-      <!-- <ion-icon slot="start" name="md-albums"></ion-icon>
-      {{'Newest Products'|translate}}
-    </ion-button> -->
-    <h5  style="text-align: center; margin: 10px;" >
+    <h4 style="text-align: center; margin: 10px; font-weight: bold;">
       {{ 'Newest Products' | translate }}
-    </h5>
-  </ion-row>
-
+    </h4>
   <ion-slides [options]="sliderConfig">
     <ion-slide *ngFor="let p of shared.tab1">
       <app-product [data]="p" [type]="'normal'"></app-product>
@@ -59,15 +38,9 @@
     </ion-slide>
   </ion-slides>
 
-  <!-- <ion-row class="top-icon-header">
-    <ion-button fill="clear">
-      <ion-icon slot="start" name="md-bookmark"></ion-icon>
-      {{ 'On Sale Products' | translate }}
-    </ion-button>
-  </ion-row> -->
-  <h5  style="text-align: center; margin: 10px;" >
+  <h4 style="text-align: center; margin: 10px; font-weight: bold;">
     {{ 'On Sale Products' | translate }}
-  </h5>
+  </h4>
   <ion-slides [options]="sliderConfig">
     <ion-slide *ngFor="let p of shared.tab2">
       <app-product [data]="p" [type]="'normal'"></app-product>
@@ -78,15 +51,10 @@
       </ion-button>
     </ion-slide>
   </ion-slides>
-  <!-- <ion-row class="top-icon-header">
-    <ion-button fill="clear">
-      <ion-icon slot="start" name="md-list"></ion-icon>
-      {{ 'Featured Products' | translate }}
-    </ion-button>
-  </ion-row> -->
-  <h5  style="text-align: center; margin: 10px;" >
+
+  <h4 style="text-align: center; margin: 10px; font-weight: bold;">
     {{ 'Featured Products' | translate }}
-  </h5>
+  </h4>
   <ion-slides [options]="sliderConfig">
     <ion-slide *ngFor="let p of shared.tab3">
       <app-product [data]="p" [type]="'normal'"></app-product>
@@ -97,17 +65,12 @@
       </ion-button>
     </ion-slide>
   </ion-slides>
-  <!-- For Vendor List -->
-  <!--<app-vendor-list></app-vendor-list>-->
-  <!-- recently view Heading -->
-  <ion-row *ngIf="shared.recentViewedProducts.length!=0" >
-    <!-- <ion-button fill="clear">
-      <ion-icon slot="start" name="md-list"></ion-icon>
-      {{'Recently Viewed'|translate}}
-    </ion-button> -->
-    <h5  style="text-align: center; margin: 10px;" >
+
+  <ion-row *ngIf="shared.recentViewedProducts.length!=0">
+ 
+    <h4 style="text-align: center; margin: 10px; font-weight: bold;">
       {{ 'Recently Viewed' | translate }}
-    </h5>
+    </h4>
   </ion-row>
   <!-- recently viewed swipe slider -->
   <ion-slides #recentSlider [options]="sliderConfig">

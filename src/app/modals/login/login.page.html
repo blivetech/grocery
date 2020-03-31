@@ -1,26 +1,27 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button fill="clear" (click)="dismiss()">
-        <ion-icon name="close"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title class="ion-no-padding">{{'Login'|translate}}</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content class="ion-padding">
-  <ion-img src="assets/icons_stripe.svg"></ion-img>
 
+<ion-content class="ion-padding ogin-bg" >
+  <ion-button fill="clear" style="color: white;" (click)="dismiss()">CLOSE
+   
+  </ion-button>
+
+  <div class="heading">
+    <h1 style="font-weight: 700; color: white;">Login</h1>
+    <p style="font-weight: bold; color: white;">Please sign in to continue</p>
+</div>
+
+  <!-- <ion-img src="assets/icons_stripe.svg"></ion-img> -->
   <form #loginForm="ngForm" class="form" (ngSubmit)="login()">
-    <ion-item>
-      <ion-label position="floating">{{'Email'|translate}}</ion-label>
-      <ion-input type="text" name="email" [(ngModel)]="formData.email" required>
+    <ion-item style="margin-left: 20px;" class="round-input">
+      <ion-label position="floating">{{'Mobile Number'|translate}}</ion-label>
+      <ion-input type="text"  name="email" [(ngModel)]="formData.email" required>
+        <ion-icon name="phone" color="primary" slot="start"></ion-icon>
+
       </ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">{{'Password'|translate}}</ion-label>
+    <ion-item class="round-input">
+      <ion-label position="floating">{{'OTP'|translate}}</ion-label>
       <ion-input type="password" name="password" [(ngModel)]="formData.password" required>
       </ion-input>
     </ion-item>
@@ -32,7 +33,7 @@
     </ion-item>
 
 
-    <ion-button [disabled]="!loginForm.form.valid" color="secondary" expand="full" type="submit">
+    <ion-button [disabled]="!loginForm.form.valid" shape="round" class="btn-yellow" color="secondary"  type="submit">
       {{ 'Login' | translate }}
     </ion-button>
 

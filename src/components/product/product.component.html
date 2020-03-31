@@ -16,9 +16,10 @@
       <!-- <div>
         <div *ngIf="p.discount_price!=null">{{pDiscount()}} {{'OFF'|translate}}</div>
       </div> -->
-      <p (click)="showProductDetail()">{{p.products_name}}</p>
+    
       <ion-img id="newimage" src="assets/badge_new.png" *ngIf="checkProductNew()"></ion-img>
       <img id="image" src="{{config.imgUrl+p.products_image}}" (click)="showProductDetail()">
+      <p class="wraptext" (click)="showProductDetail()">{{p.products_name}}</p>
       <ion-row class="ion-no-padding">
         <ion-col size="10" class="ion-no-padding" *ngIf="type!='flash'">
           <h4 class="card-price-normal" *ngIf="p.discount_price==null">{{p.products_price|curency}}</h4>
