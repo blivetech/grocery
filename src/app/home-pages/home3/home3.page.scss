@@ -1,4 +1,5 @@
 ion-content {
+  
   background-color: #f4f4f4;
   .swiper-slide {
     max-width: 40%;
@@ -14,4 +15,9 @@ ion-content {
   app-product {
     width: 100%;
   }
+}
+.hr {
+  border-bottom: 1px solid #ccc;
+  margin: 10px 0;
+  width: 100%;
 }

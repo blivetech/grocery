@@ -1,17 +1,17 @@
 :root {
-  --ion-color-primary: #2195d0;
+  --ion-color-primary: #ff6347;
   --ion-color-primary-rgb: 81,104,143;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255,255,255;
-  --ion-color-primary-shade: #00679f;
-  --ion-color-primary-tint: #67c5ff;
+  --ion-color-primary-shade: #e73516;
+  --ion-color-primary-tint: #e73516;
 
-  --ion-color-secondary: #3980ff;
+  --ion-color-secondary: #37C420;
   --ion-color-secondary-rgb: 85,127,95;
   --ion-color-secondary-contrast: #ffffff;
   --ion-color-secondary-contrast-rgb: 255,255,255;
-  --ion-color-secondary-shade: #0055cb;
-  --ion-color-secondary-tint: #7dafff;
+  --ion-color-secondary-shade: rgb(22, 143, 3);
+  --ion-color-secondary-tint: rgb(80, 223, 58);
 
   --ion-color-tertiary: #7044ff;
   --ion-color-tertiary-rgb: 112,68,255;
@@ -70,3 +70,4 @@
   --ion-color-facebook: #3b5998;
 }
 //==================================== global css ==================================
+

@@ -2,18 +2,17 @@
   <ion-toolbar>
    
     <ion-title>
-      <ion-img src="assets/logo_header.png" alt="logo"></ion-img>
+      <!-- <ion-img src="assets/logo_header.png" alt="logo"></ion-img> -->
     </ion-title>
     
   </ion-toolbar>
 </ion-header>
-<ion-content class="ion-padding-bottom">
+<ion-content class="ion-padding-bottom ">
 
   <app-banner></app-banner>
 
   <!-- Flash sale items products -->
-
-    <h5 style="text-align: center; margin: 10px;" >
+    <h5  style="text-align: center; margin: 10px;" >
       Shop by catrgory
     </h5>
     <!-- <ion-button id="second" fill="clear" (click)="openCategoryPage()">
@@ -24,11 +23,14 @@
   <app-categories [type]="'grid'"></app-categories>
 
   <div class="module" *ngIf="shared.flashSaleProducts.length!=0">
-    <ion-row class="top-icon-header">
-      <ion-button fill="clear">
-        <ion-icon slot="start" name="md-clock"></ion-icon>
+    <ion-row >
+      <!-- <ion-button fill="clear"> -->
+        <!-- <ion-icon slot="start" name="md-clock"></ion-icon>
         {{'Flash Sale'|translate}}
-      </ion-button>
+      </ion-button> -->
+      <h5  style="text-align: center; margin: 10px;" >
+        {{'Flash Sale'|translate}}
+      </h5>
     </ion-row>
     <ion-slides [options]="sliderConfig">
       <ion-slide *ngFor="let p of shared.flashSaleProducts">
@@ -36,11 +38,14 @@
       </ion-slide>
     </ion-slides>
   </div>
-  <ion-row class="top-icon-header">
-    <ion-button fill="clear">
-      <ion-icon slot="start" name="md-albums"></ion-icon>
+  <ion-row>
+    <!-- <ion-button fill="clear"> -->
+      <!-- <ion-icon slot="start" name="md-albums"></ion-icon>
       {{'Newest Products'|translate}}
-    </ion-button>
+    </ion-button> -->
+    <h5  style="text-align: center; margin: 10px;" >
+      {{ 'Newest Products' | translate }}
+    </h5>
   </ion-row>
 
   <ion-slides [options]="sliderConfig">
@@ -54,13 +59,15 @@
     </ion-slide>
   </ion-slides>
 
-  <ion-row class="top-icon-header">
+  <!-- <ion-row class="top-icon-header">
     <ion-button fill="clear">
       <ion-icon slot="start" name="md-bookmark"></ion-icon>
       {{ 'On Sale Products' | translate }}
     </ion-button>
-  </ion-row>
-
+  </ion-row> -->
+  <h5  style="text-align: center; margin: 10px;" >
+    {{ 'On Sale Products' | translate }}
+  </h5>
   <ion-slides [options]="sliderConfig">
     <ion-slide *ngFor="let p of shared.tab2">
       <app-product [data]="p" [type]="'normal'"></app-product>
@@ -71,13 +78,15 @@
       </ion-button>
     </ion-slide>
   </ion-slides>
-  <ion-row class="top-icon-header">
+  <!-- <ion-row class="top-icon-header">
     <ion-button fill="clear">
       <ion-icon slot="start" name="md-list"></ion-icon>
       {{ 'Featured Products' | translate }}
     </ion-button>
-  </ion-row>
-
+  </ion-row> -->
+  <h5  style="text-align: center; margin: 10px;" >
+    {{ 'Featured Products' | translate }}
+  </h5>
   <ion-slides [options]="sliderConfig">
     <ion-slide *ngFor="let p of shared.tab3">
       <app-product [data]="p" [type]="'normal'"></app-product>
@@ -91,11 +100,14 @@
   <!-- For Vendor List -->
   <!--<app-vendor-list></app-vendor-list>-->
   <!-- recently view Heading -->
-  <ion-row *ngIf="shared.recentViewedProducts.length!=0" class="top-icon-header">
-    <ion-button fill="clear">
+  <ion-row *ngIf="shared.recentViewedProducts.length!=0" >
+    <!-- <ion-button fill="clear">
       <ion-icon slot="start" name="md-list"></ion-icon>
       {{'Recently Viewed'|translate}}
-    </ion-button>
+    </ion-button> -->
+    <h5  style="text-align: center; margin: 10px;" >
+      {{ 'Recently Viewed' | translate }}
+    </h5>
   </ion-row>
   <!-- recently viewed swipe slider -->
   <ion-slides #recentSlider [options]="sliderConfig">

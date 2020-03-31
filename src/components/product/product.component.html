@@ -12,13 +12,13 @@
 
   <div *ngIf="p!=1">
 
-    <ion-card *ngIf="type=='normal' || type=='recent' || type=='wishList' || type=='flash'" class="animated fadeIn">
-      <div>
+    <ion-card *ngIf="type=='normal' || type=='recent' || type=='wishList' || type=='flash'" style="background: white;" class="animated fadeIn">
+      <!-- <div>
         <div *ngIf="p.discount_price!=null">{{pDiscount()}} {{'OFF'|translate}}</div>
-      </div>
+      </div> -->
+      <p (click)="showProductDetail()">{{p.products_name}}</p>
       <ion-img id="newimage" src="assets/badge_new.png" *ngIf="checkProductNew()"></ion-img>
       <img id="image" src="{{config.imgUrl+p.products_image}}" (click)="showProductDetail()">
-      <p (click)="showProductDetail()">{{p.products_name}}</p>
       <ion-row class="ion-no-padding">
         <ion-col size="10" class="ion-no-padding" *ngIf="type!='flash'">
           <h4 class="card-price-normal" *ngIf="p.discount_price==null">{{p.products_price|curency}}</h4>
@@ -43,8 +43,8 @@
         <ion-button color="secondary" *ngIf="config.cartButton==1 && p.defaultStock>0 && p.products_type==0"
           (click)="addToCart(p)">{{'ADD TO CART'|translate}}
         </ion-button>
-        <ion-button color="secondary" (click)="showProductDetail()" *ngIf="config.cartButton==1 && p.products_type!=0">
-          {{'DETAILS'|translate}}
+        <ion-button color="secondary" (click)="addToCart(p)" *ngIf="config.cartButton==1 && p.products_type!=0">
+         Add
         </ion-button>
         <ion-button color="secondary" color="danger"
           *ngIf="config.cartButton==1 && p.defaultStock<=0 && p.products_type==0">
