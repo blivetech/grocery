@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title> {{'My Cart'| translate }} </ion-title>
+    <ion-title style="font-weight: 900;"> {{'My Cart'| translate }} </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -30,7 +30,7 @@
   <ion-card class="ion-padding" *ngFor="let product of shared.cartProducts">
     <ion-card-header class="ion-no-padding">
       <ion-card-subtitle>
-        <h3> {{product.products_name}}
+        <h3 style="font-weight: 700;color: black;"> {{product.products_name}}
         </h3>
       </ion-card-subtitle>
     </ion-card-header>
@@ -49,9 +49,9 @@
             <p class="para-del">{{product.price| curency}}</p>
             <div class="div-btn">
               <ion-button size="small" fill="outline" (click)="qunatityMinus(product)">
-                <p>-</p>
+                <p style="padding-bottom: 6px;">-</p>
               </ion-button>
-              <span>{{product.customers_basket_quantity}}</span>
+              <span>x{{product.customers_basket_quantity}}</span>
               <ion-button class="add-btn" size="small" fill="outline" (click)="qunatityPlus(product)">
                 <p>+</p>
               </ion-button>
@@ -82,9 +82,9 @@
     <ion-card-content>
       <ion-row>
         <ion-col size="6">
-          <strong> {{'Total'|translate}}</strong>
+          <strong style="font-weight: 800;font-size: 18px;"> {{'Total'|translate}}</strong>
         </ion-col>
-        <ion-col size="6" class="ion-text-right">
+        <ion-col size="6" style="color: black;font-weight: 800;font-size: 18px;" class="ion-text-right">
           <strong>{{total| curency}}</strong>
         </ion-col>
       </ion-row>

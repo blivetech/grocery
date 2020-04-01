@@ -1,46 +1,64 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button fill="clear" (click)="dismiss()">
         <ion-icon name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title class="ion-no-padding">{{'Create an Account'|translate}}</ion-title>
+    <ion-title style="font-weight: 900;" class="ion-no-padding">{{'Create an Account'|translate}}</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
-<ion-content class="ion-padding">
+<ion-content  class="ion-padding">
+  <ion-button fill="clear"  style="color:#fff; margin-right: -10px; font-size: 20px;  float: right;" (click)="dismiss()">
+    <ion-icon name="close"></ion-icon>
+  </ion-button>
+  <div class="heading">
+    <h1 style="font-weight: 700; color: white; font-size: 36px; padding-bottom: 5px;">Sign Up</h1>
+    <p style=" color: white;">Please Enter Your Details</p>
+</div>
 
+  
+<!-- 
   <ion-avatar>
     <ion-img src="assets/avatar.png"></ion-img>
-  </ion-avatar>
+  </ion-avatar> -->
 
   <form #loginForm="ngForm" class="form" (ngSubmit)="registerUser()">
 
-    <ion-item>
-      <ion-label position="floating">{{'First Name'|translate}}</ion-label>
-      <ion-input type="text" name="customers_firstname" [(ngModel)]="formData.customers_firstname" required>
+    <ion-item class="round-input">
+      <!-- <ion-label position="floating">{{'First Name'|translate}}</ion-label> -->
+      <ion-icon style="padding-left: 15px;" name="md-phone-portrait" color="primary" slot="start"></ion-icon>
+      <ion-input type="text"  placeholder="First Name" name="customers_firstname" [(ngModel)]="formData.customers_firstname" required>
       </ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">{{'Last Name'|translate}}</ion-label>
-      <ion-input type="text" name="customers_lastname" [(ngModel)]="formData.customers_lastname" required>
+    <ion-item class="round-input">
+      <!-- <ion-label position="floating">{{'Last Name'|translate}}</ion-label> -->
+      <ion-icon style="padding-left: 15px;" name="md-phone-portrait" color="primary" slot="start"></ion-icon>
+      <ion-input type="text"  placeholder="Last Name" name="customers_lastname" [(ngModel)]="formData.customers_lastname" required>
       </ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label position="floating">{{'Mobile'|translate}}</ion-label>
-      <ion-input type="text" name="Mobile" [(ngModel)]="formData.customers_telephone" required>
+
+    <ion-item class="round-input">
+      <!-- <ion-label position="floating">{{'Last Name'|translate}}</ion-label> -->
+      <ion-icon style="padding-left: 15px;" name="md-phone-portrait" color="primary" slot="start"></ion-icon>
+      <ion-input type="text"  placeholder="Mobile" name="mobile" [(ngModel)]="formData.customers_telephone" required>
       </ion-input>
     </ion-item>
-    <ion-item>
-        <ion-label position="floating">{{'Email'|translate}}</ion-label>
-        <ion-input type="email" email name="email" [(ngModel)]="formData.email" required>
+
+   
+
+    <ion-item class="round-input"> 
+        <!-- <ion-label position="floating">{{'Email'|translate}}</ion-label> -->
+        <ion-icon style="padding-left: 15px;" name="md-phone-portrait" color="primary" slot="start"></ion-icon>
+        <ion-input type="email" placeholder="email" name="email" [(ngModel)]="formData.email" required>
         </ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label position="floating">{{'Password'|translate}}</ion-label>
-      <ion-input type="password" name="c_d" [(ngModel)]="formData.password" required>
+    <ion-item class="round-input">
+      <!-- <ion-label position="floating">{{'Password'|translate}}</ion-label> -->
+      <ion-icon style="padding-left: 15px;" name="md-phone-portrait" color="primary" slot="start"></ion-icon>
+      <ion-input type="password" placeholder="password" name="c_d" [(ngModel)]="formData.password" required>
       </ion-input>
     </ion-item>
 
@@ -50,13 +68,13 @@
       </ion-label>
     </ion-item>
 
-    <p>{{"Creating an account means you’re okay with our"|translate}}
-      <a (click)="openTermServicesPage()">{{'Term and Services'|translate}}</a>,
-      <a (click)="openPrivacyPolicyPage()">{{'Privacy Policy'|translate}}</a> {{'and'|translate}}
-      <a (click)="openRefundPolicyPage()">{{'Refund Policy'|translate}}</a>
+    <p style="color:#fff">{{"Creating an account means you’re okay with our"|translate}}
+      <a (click)="openTermServicesPage()" style="color:#fff">{{'Term and Services'|translate}}</a>,
+      <a (click)="openPrivacyPolicyPage()" style="color:#fff">{{'Privacy Policy'|translate}}</a> {{'and'|translate}}
+      <a (click)="openRefundPolicyPage()" style="color:#fff">{{'Refund Policy'|translate}}</a>
     </p>
 
-    <ion-button disabled="true" expand="full" color="secondary" type="submit" [disabled]="!loginForm.form.valid">
+    <ion-button disabled="true" expand="full" shape="round" class="btn-yellow" type="submit" [disabled]="!loginForm.form.valid">
       {{'Register'|translate}}
     </ion-button>
   </form>

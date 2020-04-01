@@ -36,8 +36,8 @@
 }
 ion-header {
   ion-toolbar {
-    --background: var(--ion-color-primary);
-    --color: white;
+    --background: white;
+    --color:  var(--ion-color-primary);
     ion-title {
       ion-img {
         height: 25px;
@@ -168,3 +168,17 @@ app-product {
 .animate-item {
   animation: fadeIn;
 }
+
+
+
+ion-tab-bar{
+  box-shadow: 5px 14px 30px rgba(0, 0, 0, 0.9);
+
+}
+
+//  .button-native{
+//         border-radius: 40px !important;
+//         box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+//         background: white;
+//       }
+      

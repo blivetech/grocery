@@ -1,27 +1,31 @@
 
 
 <ion-content class="ion-padding ogin-bg" >
-  <ion-button fill="clear" style="color: white;" (click)="dismiss()">CLOSE
-   
+ 
+
+  <ion-button fill="clear"  style="color:#fff; margin-right: -10px; font-size: 20px;  float: right;" (click)="dismiss()">
+    <ion-icon name="close"></ion-icon>
   </ion-button>
 
   <div class="heading">
-    <h1 style="font-weight: 700; color: white;">Login</h1>
-    <p style="font-weight: bold; color: white;">Please sign in to continue</p>
+    <h1 style="font-weight: 700; color: white; font-size: 36px; padding-bottom: 5px;">Login</h1>
+    <p style=" color: white;">Please sign in to continue</p>
 </div>
 
   <!-- <ion-img src="assets/icons_stripe.svg"></ion-img> -->
   <form #loginForm="ngForm" class="form" (ngSubmit)="login()">
-    <ion-item style="margin-left: 20px;" class="round-input">
-      <ion-label position="floating">{{'Mobile Number'|translate}}</ion-label>
-      <ion-input type="text"  name="email" [(ngModel)]="formData.email" required>
-        <ion-icon name="phone" color="primary" slot="start"></ion-icon>
+    <ion-item  class="round-input">
+      <!-- <ion-label position="floating">{{'Mobile Number'|translate}}</ion-label> -->
+      <ion-icon style="padding-left: 15px;" name="md-phone-portrait" color="primary" slot="start"></ion-icon>
+      <ion-input type="text" placeholder="Email"  name="email" [(ngModel)]="formData.email" required>
+        
 
       </ion-input>
     </ion-item>
 
     <ion-item class="round-input">
-      <ion-label position="floating">{{'OTP'|translate}}</ion-label>
+      <!-- <ion-label position="floating">{{'OTP'|translate}}</ion-label> -->
+      <ion-icon  style="padding-left: 15px;" name="md-key" color="primary" slot="start"></ion-icon>
       <ion-input type="password" name="password" [(ngModel)]="formData.password" required>
       </ion-input>
     </ion-item>
@@ -33,24 +37,42 @@
     </ion-item>
 
 
-    <ion-button [disabled]="!loginForm.form.valid" shape="round" class="btn-yellow" color="secondary"  type="submit">
+    <ion-button [disabled]="!loginForm.form.valid" shape="round" class="btn-yellow" type="submit">
       {{ 'Login' | translate }}
     </ion-button>
 
   </form>
 
-  <ion-button expand="full" fill="clear" color="dark" (click)="openForgetPasswordPage()">{{ "I've forgotten my
-      password?" | translate }}</ion-button>
+  <!-- <ion-button expand="full" fill="clear" color="dark" (click)="openForgetPasswordPage()">{{ "I've forgotten my
+      password?" | translate }}</ion-button> -->
+      <div class="signup-with">
+        <p style=" color: white;  margin: 30px 0 0 0; padding: 20px 15px 0 15px; font-weight: 700;">OR LOGIN WITH</p>
+    </div>
 
-  <ion-button expand="full" *ngIf="config.fbButton==1" (click)="facebookLogin()">{{ 'Login with' | translate }}
-    <ion-icon name="logo-facebook"></ion-icon>
-  </ion-button>
-  <ion-button color="danger" expand="full" *ngIf="config.googleButton==1" (click)="googleLogin()">
-    {{ 'Login with' | translate }}
-    <ion-icon name="logo-google"></ion-icon>
-  </ion-button>
-  <ion-button expand="block" fill="outline" (click)="openSignUpPage()">{{ 'Register' | translate }}</ion-button>
-  <ion-button expand="block" *ngIf="!hideGuestLogin" [disabled]="shared.cartProducts.length==0" (click)="guestLogin()">
-    {{'Continue as a Guest'|translate}}</ion-button>
+<ion-grid>
+  <ion-row>
+    <ion-col size="6">
+      <ion-button class="btn-white" expand="full" shape="round" *ngIf="config.fbButton==1" (click)="facebookLogin()">{{ 'Login with' | translate }}
+        <ion-icon name="logo-facebook"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button class="btn-goo" expand="full" shape="round" *ngIf="config.googleButton==1" (click)="googleLogin()">
+        {{ 'Login with' | translate }}
+        <ion-icon name="logo-google"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+ 
+ 
+  <!-- <ion-button expand="block" *ngIf="!hideGuestLogin" [disabled]="shared.cartProducts.length==0" (click)="guestLogin()">
+    {{'Continue as a Guest'|translate}}</ion-button> -->
   <!-- *ngIf="config.guestCheckOut && hideGuestLogin" -->
+
 </ion-content>
+
+<ion-footer>
+  <p style="color: black; text-align: center;" (click)="openSignUpPage()">Don't have account ? {{ 'Register' | translate }}</p>
+
+</ion-footer>

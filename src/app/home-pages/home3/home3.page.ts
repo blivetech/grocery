@@ -26,7 +26,9 @@ export class Home3Page implements OnInit {
     public http: HttpClient,
     public loading: LoadingService,
     public shared: SharedDataService,
-  ) { }
+  ) { 
+
+  }
   onChangeKeyword = function (e) {
     //console.log(this.search);
     // if (search != undefined) {

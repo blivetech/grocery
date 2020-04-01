@@ -27,7 +27,14 @@ export class CartPage implements OnInit {
     public couponProvider: CouponService,
     public actionSheetCtrl: ActionSheetController,
   ) {
+
+    this.reload();
+
   }
+  reload(){
+    this.ionViewWillEnter();
+  }
+
   totalPrice() {
     var price = 0;
     for (let value of this.shared.cartProducts) {
@@ -110,6 +117,8 @@ export class CartPage implements OnInit {
   }
 
   ngOnInit() {
+
+    console.log("oninit")
   }
 
 }

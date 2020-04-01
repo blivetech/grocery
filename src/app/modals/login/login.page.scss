@@ -39,7 +39,9 @@ form {
   }
   ion-button {
     text-transform: uppercase;
-    color: #fafafa;
+    color: #f2404e;
+    font-weight: 700;
+    font-size: 19px;
   }
 }
 
@@ -61,12 +63,10 @@ ion-button {
     --border-width: thin;
   }
 }
-ion-item{
-  margin-left: 10px;
-}
+
 .heading{
   margin-top: 20px;
-  padding: 80px 0 40px 0;
+  padding: 0px 15px 40px 15px;
  // text-align: center;
 }
 
@@ -92,18 +92,48 @@ ion-item{
 }
 
 .btn-yellow{
-       --background: var(--ion-color-btn);
-       color: #000;
+       width: 100% !important;
+       height: 50px;
        font-weight: 600;
        margin-top: 30px;
-       padding-left: 15px;
-       padding-right: 15px;
-       text-align: center;
+       padding-left: 10px;
+       padding-right: 10px;
+       text-align: center;     
+       --background: var(--ion-color-btn);
+       color: var(--ion-color-primary);
      
 }
 
+.btn-white{
+  --background: var(--ion-color-btn);
+  color: #3822ea;
+
+}
+
+
+.btn-goo{
+  --background: var(--ion-color-btn);
+  color:#e03333;
+
+}
+
+
+.button-native{
+  border-radius: 40px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
 
 
 .sign-up{
   font-size: 13px;
+}
+
+
+
+ion-input {
+  background: transparent !important;
+}
+
+ion-item {
+  margin: 0 10px 30px 10px !important;
 }

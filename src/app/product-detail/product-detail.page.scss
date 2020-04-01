@@ -28,7 +28,7 @@
   }
   .icons {
     position: absolute;
-    top: 10px;
+    top: 20px;
     right: 0;
     background-color: #eee;
     z-index: 9;
@@ -50,11 +50,12 @@
   .product-slides {
     .swiper-wrapper {
       .swiper-slide {
-        background-color: rgb(236, 236, 236);
+        // background-color: rgb(236, 236, 236);
+         background-color: rgb(255, 255, 255);
       }
     }
     img {
-      filter: brightness(0.9);
+      // filter: brightness(0.9);
     }
   }
   .product-detail-title {
@@ -381,9 +382,10 @@
   }
   .product-description {
     p {
-      font-size: 14px;
+      font-size: 17px;
       padding-left: 0px;
       margin-top: 5px;
+      line-height: 27px;
     }
   }
   .product-tags-top {
@@ -458,3 +460,12 @@
     --color: white;
   }
 }
+
+ion-content {
+  --background: #fff;
+}
+
+.product-description{
+  padding-bottom: 40px;
+}
+

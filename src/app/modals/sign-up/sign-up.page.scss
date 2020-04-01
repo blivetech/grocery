@@ -7,7 +7,13 @@ ion-content {
     height: 100px;
     width: 100px;
   }
-
+  
+    --background: none; 
+    background-image: url('/assets/login_bg.png'); 
+    background-position: center top;
+     background-repeat: no-repeat; 
+     background-size: cover;
+    
   // For Form
   form {
     padding-top: 28px;
@@ -18,7 +24,7 @@ ion-content {
         color: gray;
       }
       &:nth-child(6) {
-        height: 33px;
+        // height: 33px;
         ion-label {
           color: red;
         }
@@ -28,9 +34,140 @@ ion-content {
       font-size: 14px;
     }
     ion-button {
-      --background: #557f5f;
+      --background: #ffffff;
       text-transform: uppercase;
-      color: #fafafa;
+      color: #f2404e;
     }
   }
+}
+ion-header {
+  ion-toolbar {
+    --background: var(--ion-color-primary);
+    --color: white;
+    ion-icon {
+      zoom: 1.4;
+    }
+  }
+}
+
+ion-content {
+  --background: none; 
+  background-image: url('/assets/login_bg.png'); 
+  background-position: center top;
+   background-repeat: no-repeat; 
+   background-size: cover;
+   }
+// For image design
+ion-img {
+  height: 150px;
+  opacity: 0.1;
+}
+
+// For Form
+form {
+  padding-top: 28px;
+  ion-item {
+    --padding-start: 0;
+    --background: #fafafa;
+    ion-label {
+      color: gray;
+    }
+    &:nth-child(3) {
+      // height: 33px;
+      ion-label {
+        color: red;
+      }
+    }
+  }
+  ion-button {
+    text-transform: uppercase;
+    color: #f2404e;
+    font-weight: 700;
+    font-size: 19px;
+  }
+}
+
+// For Login, Facebook, Register Buttons
+ion-button {
+  &:nth-child(3) {
+    text-transform: capitalize;
+    margin-top: 15px;
+  }
+  &:nth-child(4) {
+    margin-top: 15px;
+    --background: #3b5998;
+    color: white;
+  }
+  &:nth-child(5) {
+    color: black;
+    margin-top: 20px;
+    --border-color: black;
+    --border-width: thin;
+  }
+}
+
+.heading{
+  margin-top: 20px;
+  padding: 20px 15px 10px 15px;
+ // text-align: center;
+}
+
+.heading h1{
+  margin: 0 0 3px 0;
+  font-weight: bold;
+}
+
+.heading p{
+  margin: 0;
+}
+
+.round-input{
+  border-radius: 50px;
+   margin-bottom: 20px;
+ border: 1px solid #d3d3d3;
+}
+
+.forgot{
+  margin-top: -15px;
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.btn-yellow{
+       width: 100% !important;
+       height: 50px;
+       font-weight: 600;
+       margin-top: 30px;
+       padding-left: 10px;
+       padding-right: 10px;
+       text-align: center;     
+       --background: var(--ion-color-btn);
+       color: var(--ion-color-primary);
+     
+}
+
+.btn-white{
+  --background: var(--ion-color-btn);
+  color: #333;
+
+}
+
+.button-native{
+  border-radius: 40px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+
+.sign-up{
+  font-size: 13px;
+}
+
+
+
+ion-input {
+  background: transparent !important;
+}
+
+ion-item {
+  margin: 0 10px 30px 10px !important;
 }

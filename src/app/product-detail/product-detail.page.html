@@ -1,9 +1,9 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header >
+  <ion-toolbar style="background: white;">
     <ion-buttons slot="start">
-      <ion-back-button icon="arrow-round-back"></ion-back-button>
+      <ion-back-button color="primary" icon="arrow-round-back"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{product.products_name}}</ion-title>
+    <!-- <ion-title>{{product.products_name}}</ion-title> -->
   </ion-toolbar>
 
   <ion-toolbar *ngIf="!is_upcomming && product.flash_start_date" color="secondary">
@@ -16,8 +16,10 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
+
+
+
 <ion-content class="product-detail-page">
-  <h4 style="font-weight: bold;">{{product.products_name}}</h4>
   <div class="product-tags-top">
     <div class="product-tag-new" *ngIf="checkProductNew()">{{'New'|translate}}</div>
   </div>
@@ -48,14 +50,20 @@
 
       <ion-col class="woo-price-group" size="12">
         <span *ngIf="!product.flash_start_date">
-          <span class="product-price-normal" *ngIf="product.discount_price==null">{{product_price |curency}}</span>
-          <span class="product-price-normal" *ngIf="product.discount_price!=null">{{discount_price |curency}}</span>
-          <span class="product-price-normal-through"
+          <span class="product-price-normal" style="font-size: 22px;
+          font-weight: 700;color: #3f5625;" *ngIf="product.discount_price==null">{{product_price |curency}}</span>
+          
+          <span class="product-price-normal" style="margin-left: 15px;font-size: 22px;color: #3f5625;
+          font-weight: 700;" *ngIf="product.discount_price!=null">{{discount_price |curency}}</span>
+        
+        <span class="product-price-normal-through" style="text-decoration:line-through;margin-left: 15px;color:#3f5625"
             *ngIf="product.discount_price!=null">{{product_price |curency}}</span>
         </span>
         <span *ngIf="product.flash_start_date">
-          <span class="product-price-normal">{{flash_price |curency}}</span>
-          <span class="product-price-normal-through">{{product_price |curency}}</span>
+          <span style="margin-left: 15px;font-size: 22px;color: #3f5625;
+          font-weight: 700;" class="product-price-normal">{{flash_price |curency}}</span>
+          <span style="margin-left: 15px;font-size: 22px;color: #3f5625;
+          font-weight: 700; " class="product-price-normal-through">{{product_price |curency}}</span>
         </span>
 
         <span class="product-outstock" *ngIf="cartButton=='outOfStock'">{{'Out of Stock'|translate}}</span>
@@ -63,23 +71,30 @@
       </ion-col>
 
       <ion-col class="product-title" size="12">
-        <h3>{{product.products_name}}
+        <h2 style="font-weight:700">{{product.products_name}}
           <br>
-          <small *ngFor="let c of product.categories; let i = index">{{c.categories_name}}<span
+          <small style="margin-top: 10px;" *ngFor="let c of product.categories; let i = index">{{c.categories_name}}<span
               *ngIf="product.categories.length!=i+1">,</span>&nbsp;</small>
-        </h3>
-        <p>{{'Likes'|translate}}&nbsp;({{product.products_liked}})</p>
+        </h2>
+        <!-- <p>{{'Likes'|translate}}&nbsp;({{product.products_liked}})</p> -->
       </ion-col>
     </ion-row>
   </ion-grid>
+  <ion-list>
+    <ion-radio-group *ngFor=" let att of product.attributes">
+      <ion-list-header>
+        <ion-label>{{att.option.name}}</ion-label>
+      </ion-list-header>
+      <ion-item *ngFor=" let val of att.values; let i = index">
+        <ion-label>{{val.value+' '+val.price_prefix+val.price+' '+config.currency}}</ion-label>
+        <ion-radio slot="start" [value]="val" [checked]="i==0" (ionSelect)="fillAttributes(val,att.option.id)">
+        </ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
   <ion-grid class="product-detail-content ion-no-padding"
     *ngIf="product.products_description!=null && product.products_description!=''">
-    <ion-row class="top-icon-header heading">
-      <ion-button fill="clear">
-        <ion-icon slot="start" name="md-list"></ion-icon>
-        {{'Product Description'|translate}}
-      </ion-button>
-    </ion-row>
+  
     <ion-row>
       <ion-col size="12" style="padding:0 10px">
         <div class="product-description" [innerHTML]="product.products_description"></div>
@@ -103,18 +118,7 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-list>
-    <ion-radio-group *ngFor=" let att of product.attributes">
-      <ion-list-header>
-        <ion-label>{{att.option.name}}</ion-label>
-      </ion-list-header>
-      <ion-item *ngFor=" let val of att.values; let i = index">
-        <ion-label>{{val.value+' '+val.price_prefix+val.price+' '+config.currency}}</ion-label>
-        <ion-radio slot="start" [value]="val" [checked]="i==0" (ionSelect)="fillAttributes(val,att.option.id)">
-        </ion-radio>
-      </ion-item>
-    </ion-radio-group>
-  </ion-list>
+ 
 
 </ion-content>
 <ion-footer class="product-detail-footer">
