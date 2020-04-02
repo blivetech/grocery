@@ -5,6 +5,7 @@ import { SharedDataService } from 'src/providers/shared-data/shared-data.service
 import { ConfigService } from 'src/providers/config/config.service';
 import { HttpClient } from '@angular/common/http';
 import { LoadingService } from 'src/providers/loading/loading.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home3',
@@ -26,6 +27,8 @@ export class Home3Page implements OnInit {
     public http: HttpClient,
     public loading: LoadingService,
     public shared: SharedDataService,
+    public route: Router,
+    public navCtrl: NavController
   ) { 
 
   }
@@ -71,6 +74,10 @@ export class Home3Page implements OnInit {
   };
 
 
+  productSearch(){
+   // this.route.navigateByUrl("/search");
+   this.navCtrl.navigateForward("/tabs/search");
 
+  }
 
 }

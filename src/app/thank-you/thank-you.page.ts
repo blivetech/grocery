@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, Events } from '@ionic/angular';
+import { NavController, Events, ToastController } from '@ionic/angular';
 import { SharedDataService } from 'src/providers/shared-data/shared-data.service';
 import { ConfigService } from 'src/providers/config/config.service';
 
@@ -16,10 +16,20 @@ export class ThankYouPage implements OnInit {
     public shared: SharedDataService,
     public config: ConfigService,
     public events: Events,
+    public toastController: ToastController
   ) {
+
+    this.openHome();
   }
   openHome() {
-    this.navCtrl.navigateRoot("tabs/" + this.config.getCurrentHomePage());
+
+      this.presentToast("Please wait... It automatically redirect to homepage.");
+    setTimeout(() => {
+
+      this.navCtrl.navigateRoot("tabs/" + this.config.getCurrentHomePage());
+
+    }, 2500);
+  
   }
   openOrders() { this.navCtrl.navigateRoot("tabs/settings/my-orders"); }
   goBack() {
@@ -28,4 +38,14 @@ export class ThankYouPage implements OnInit {
   ngOnInit() {
   }
 
+  
+    async presentToast(message:string) {
+      const toast = await this.toastController.create({
+        message: message,
+        duration: 2000
+      });
+      toast.present();
+    
+  
+  }
 }

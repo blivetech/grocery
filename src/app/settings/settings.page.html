@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title style="font-weight: 900;">
+    <ion-title style="font-weight: 700;color: black;">
       {{'Account'| translate }}
     </ion-title>
     <ion-buttons slot="end">
@@ -38,7 +38,7 @@
       <ion-col size="12" class="ion-no-padding">
         <h2>{{shared.customerData.customers_firstname +"&nbsp;"+shared.customerData.customers_lastname}}</h2>
         <p>{{shared.customerData.email}}</p>
-        <ion-button (click)="openAccountPage()">{{'Edit Profile' | translate }}</ion-button>
+        <ion-button (click)="openPage('my-account')">{{'Edit Profile' | translate }}</ion-button>
       </ion-col>
     </ion-row>
     <span class="opacity-background"></span>

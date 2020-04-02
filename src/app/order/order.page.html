@@ -21,7 +21,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card>
+  <!-- <ion-card>
     <ion-card-header>
       <h4>{{'Billing Address'|translate}}</h4>
     </ion-card-header>
@@ -30,16 +30,16 @@
       '+orderDetail.billing_postcode+',
       '+orderDetail.billing_country}}
     </ion-card-content>
-  </ion-card>
+  </ion-card> -->
 
-  <ion-card>
+  <!-- <ion-card>
     <ion-card-header>
       <h4>{{'Shipping Method'|translate}}</h4>
     </ion-card-header>
     <ion-card-content>
       {{orderDetail.shipping_method}}
     </ion-card-content>
-  </ion-card>
+  </ion-card> -->
 
   <ion-card class="order-product">
     <ion-card-header>
@@ -133,7 +133,26 @@
       </ion-row>
     </ion-card-content>
   </ion-card>
-
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <ion-item lines="none">
+          <ion-label color="dark">{{'Payment'|translate}}</ion-label>
+          <ion-select [(ngModel)]="orderDetail.payment_method" (ionChange)=" paymentMehodChanged()"
+            okText="{{'ok'|translate}}" cancelText="{{'Cancel'|translate}}">
+            <div *ngFor="let p of paymentMethods">
+              <ion-select-option *ngIf="p.active==1" [value]="p.method">{{p.name}}</ion-select-option>
+            </div>
+            <!-- <ion-select-option value="simplePaypal" *ngIf="paymentPaypal">{{'Paypal'|translate}}</ion-select-option>
+            <ion-select-option value="paypal" *ngIf="paymentBraintree">{{'Braintree Paypal'|translate}}</ion-select-option>
+            <ion-select-option value="card_payment" *ngIf="paymentBraintree">{{'Braintree Card Payment'|translate}}</ion-select-option>
+            <ion-select-option value="stripe" *ngIf="paymentStripe">{{'Stripe Card Payment'|translate}}</ion-select-option>
+            <ion-select-option value="cash_on_delivery" *ngIf="paymentCod">{{'Cash on Delivery'|translate}}</ion-select-option> -->
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
   <ion-card *ngFor="let coupon of couponArray">
     <ion-card-content>
       <ion-row>
@@ -199,26 +218,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card>
-    <ion-card-content>
-      <ion-list>
-        <ion-item lines="none">
-          <ion-label color="dark">{{'Payment'|translate}}</ion-label>
-          <ion-select [(ngModel)]="orderDetail.payment_method" (ionChange)=" paymentMehodChanged()"
-            okText="{{'ok'|translate}}" cancelText="{{'Cancel'|translate}}">
-            <div *ngFor="let p of paymentMethods">
-              <ion-select-option *ngIf="p.active==1" [value]="p.method">{{p.name}}</ion-select-option>
-            </div>
-            <!-- <ion-select-option value="simplePaypal" *ngIf="paymentPaypal">{{'Paypal'|translate}}</ion-select-option>
-            <ion-select-option value="paypal" *ngIf="paymentBraintree">{{'Braintree Paypal'|translate}}</ion-select-option>
-            <ion-select-option value="card_payment" *ngIf="paymentBraintree">{{'Braintree Card Payment'|translate}}</ion-select-option>
-            <ion-select-option value="stripe" *ngIf="paymentStripe">{{'Stripe Card Payment'|translate}}</ion-select-option>
-            <ion-select-option value="cash_on_delivery" *ngIf="paymentCod">{{'Cash on Delivery'|translate}}</ion-select-option> -->
-          </ion-select>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
+  
 
 
   <div class="braintree-paypal" [class.hidden]="orderDetail.payment_method!='braintree_paypal'">

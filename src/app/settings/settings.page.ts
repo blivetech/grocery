@@ -83,7 +83,7 @@ export class SettingsPage implements OnInit {
     this.shared.logOut();
   }
   openAccountPage() {
-    this.navCtrl.navigateRoot("my-account");
+    this.navCtrl.navigateRoot("/my-account");
   }
   openSite() {
     this.loading.autoHide(2000);

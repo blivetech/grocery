@@ -198,9 +198,15 @@ export class AppComponent {
 
   // loading home page =========================================================================
   loadHomePage() {
+    setTimeout(() => {
+      if(localStorage.getItem('firstTime') != 'true'){
+        this.navCtrl.navigateRoot("intro");
+      }
+    }, 500);
+   
     this.storage.get('firsttimeApp').then((val) => {
       let value = val;
-      if (this.config.showIntroPage == 0) value = 'firstTime';
+
       if (value == 'firstTime') {
         this.openHomePage();
         this.config.checkingNewSettingsFromServer();
@@ -209,6 +215,7 @@ export class AppComponent {
         this.navCtrl.navigateRoot("intro");
       }
       this.storage.set('firsttimeApp', 'firstTime');
+      localStorage.setItem('firstTime','true');
     });
   }
   doubleTapToExit() {

@@ -72,7 +72,7 @@ export class MyOrdersPage implements OnInit {
   showOrderDetail(order) {
 
     this.shared.myOrderDetialPageData = order;
-    this.navCtrl.navigateForward(this.config.currentRoute + "my-order-detail");
+    this.navCtrl.navigateForward(this.config.currentRoute + "/my-order-detail");
 
   }
   openProductsPage() {

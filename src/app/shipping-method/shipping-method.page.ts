@@ -52,6 +52,7 @@ export class ShippingMethodPage implements OnInit {
         var m = data.data.shippingMethods;
         this.shippingMethod = Object.keys(m).map(function (key) { return m[key]; });
         this.shared.orderDetails.total_tax = data.data.tax;
+        console.log( "tax::"+this.shared.orderDetails.total_tax );
       }
     });
   }
@@ -77,6 +78,8 @@ export class ShippingMethodPage implements OnInit {
     let data = event.detail.value;
     this.shared.orderDetails.shipping_cost = data.rate;
     this.shared.orderDetails.shipping_method = data.name + '(' + data.shipping_method + ')';
+    console.log("cost:"+this.shared.orderDetails.shipping_cost);
+    console.log("method:"+this.shared.orderDetails.shipping_method);
   }
   openOrderPage() {
     this.navCtrl.navigateForward(this.config.currentRoute + "/order");

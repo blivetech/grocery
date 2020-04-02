@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "704066234948",
+    "firebase_url": "https://smart-india-grocery.firebaseio.com",
+    "project_id": "smart-india-grocery",
+    "storage_bucket": "smart-india-grocery.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:704066234948:android:42436231be603204d42a11",
+        "android_client_info": {
+          "package_name": "com.smartindia.grocery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "704066234948-mcmtougo2rq9hujct142n0ftceisccbb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCM7v6oekkgijB5eD9vuoDkkUpxiXPR8tM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "704066234948-mcmtougo2rq9hujct142n0ftceisccbb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

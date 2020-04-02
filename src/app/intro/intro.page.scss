@@ -1,9 +1,9 @@
 ion-content {
-  --background: none !important;
-  background: url("/assets/intro/intro_top_bg.png");
-  background-position: top center;
-  background-size: auto 80%;
-  background-repeat: no-repeat;
+  // --background: none !important;
+  // // background: url("/assets/intro/intro_top_bg.png");
+  // background-position: top center;
+  // background-size: auto 80%;
+  // background-repeat: no-repeat;
   ion-slides {
     height: 99%;
     --bullet-background: black !important;
@@ -16,6 +16,7 @@ ion-content {
       ion-row {
         border-top: none !important;
         margin-top: 2%;
+       
         ion-icon {
           zoom: 2.2;
           color: var(--ion-color-primary);
@@ -34,6 +35,7 @@ ion-content {
           margin-right: auto;
           --border-color: var(--ion-color-secondary);
           height: 30px;
+          position: absolute;
         }
         &:first-child {
           width: auto;
@@ -43,4 +45,15 @@ ion-content {
       }
     }
   }
+}
+.skipbtn{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.donebtn{
+  position: absolute;
+  bottom: 0;
+  right:  0;
 }

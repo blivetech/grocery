@@ -87,8 +87,8 @@ export class ConfigService {
   public fbButton = 1;
   public googleButton = 1;
   public notificationType = "";
-  public onesignalAppId = "";
-  public onesignalSenderId = "";
+  public onesignalAppId = "756e5d35-f78a-4dbe-9487-aeace73f3577";
+  public onesignalSenderId = "704066234948";
   public appSettings: { [k: string]: any } = {};
   public currentRoute = "tabs/home";
   constructor(

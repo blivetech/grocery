@@ -397,6 +397,8 @@ export class SharedDataService {
   //============================================================================================
   //getting token and passing to server
   subscribePush() {
+    console.log("subcribe");
+
     if (this.platform.is('cordova')) {
       // pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
       if (this.config.notificationType == "fcm") {
@@ -428,10 +430,12 @@ export class SharedDataService {
         }
       }
       else if (this.config.notificationType == "onesignal") {
-        this.oneSignal.startInit(this.config.onesignalAppId, this.config.onesignalSenderId);
+        this.oneSignal.startInit("756e5d35-f78a-4dbe-9487-aeace73f3577", "704066234948");
         this.oneSignal.endInit();
         this.oneSignal.getIds().then((data) => {
           this.registerDevice(data.userId);
+          console.log(data.userId);
+
         })
       }
     }
@@ -457,9 +461,9 @@ export class SharedDataService {
     data.processor = 'mediatek';
     data.location = 'empty';
 
-    // alert(JSON.stringify(data));
+     //alert(JSON.stringify(data));
     this.config.postHttp("registerdevices", data).then(data => {
-      //  alert(registrationId + " " + JSON.stringify(data));
+        alert(registrationId + " " + JSON.stringify(data));
     });
     //  });
 
