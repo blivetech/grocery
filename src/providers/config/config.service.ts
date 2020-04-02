@@ -14,9 +14,9 @@ if (localStorage.langId == undefined) {
   localStorage.langId = '1';//default language id
   localStorage.languageCode = "en"; //default language code
   localStorage.direction = "ltr"; //default language direction of app
-  localStorage.currency = "$";  //default currecny html code to show in app.
+  localStorage.currency = "₹";  //default currecny html code to show in app.
   // Please visit this link to get your html code  https://html-css-js.com/html/character-codes/currency/
-  localStorage.currencyCode = "USD";  //default currency code
+  localStorage.currencyCode = "INR";  //default currency code
   localStorage.currencyPos = "left";  //default currency position
   localStorage.decimals = 2;  //default currecny decimal
 }

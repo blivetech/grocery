@@ -11,7 +11,6 @@ import { SharedDataService } from 'src/providers/shared-data/shared-data.service
 })
 export class LanguagePage implements OnInit {
 
-
   public languages: any;
   selectedLanguage;
   translate;
@@ -47,7 +46,8 @@ export class LanguagePage implements OnInit {
       setTimeout(() => {
         window.location.reload();
       }, 900);
-
+      console.log(JSON.stringify(localStorage.langId));
+      console.log(JSON.stringify(localStorage.direction));
     }
   }
   //close modal

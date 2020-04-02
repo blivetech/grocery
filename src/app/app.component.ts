@@ -182,6 +182,7 @@ export class AppComponent {
       this.config.siteSetting().then((value) => {
         this.loadHomePage()
         this.getLeftItems();
+
         //subscribe for push notifiation
         this.storage.get('pushNotification').then((val) => {
           if (val == undefined) {
@@ -203,6 +204,11 @@ export class AppComponent {
         this.navCtrl.navigateRoot("intro");
       }
     }, 500);
+
+    localStorage.currencyCode = "INR";
+    localStorage.currencyPos = "left";
+    localStorage.currency = "₹";
+    localStorage.decimals = "2";
    
     this.storage.get('firsttimeApp').then((val) => {
       let value = val;

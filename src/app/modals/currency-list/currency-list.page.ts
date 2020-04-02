@@ -40,27 +40,23 @@ export class CurrencyListPage implements OnInit {
     if (this.currency == undefined) return;
     
     console.log(localStorage.currencyCode + "  " + this.currency.code);
-    if (localStorage.currencyCode != this.currency.code) {
+ //   if (localStorage.currencyCode != this.currency.code) {
       this.loading.autoHide(1000);
 
       localStorage.currencyCode = this.currency.code;
-      if (this.currency.symbol_left != null) {
+
         localStorage.currencyPos = "left";
         localStorage.currency = this.currency.symbol_left;
-      }
-      else {
-        localStorage.currencyPos = "right";
-        localStorage.currency = this.currency.symbol_right;
-      }
+        console.log(" localStorage.currency"+ localStorage.currency);
 
-      localStorage.decimals = this.currency.decimal_places;
+      localStorage.decimals = "2";
       this.shared.emptyCart();
       this.shared.emptyRecentViewed();
 
       setTimeout(() => {
-        window.location.reload();
+ //       window.location.reload();
       }, 1000);
-    }
+  //  }
   }
   //close modal
   dismiss() {
