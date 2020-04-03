@@ -58,7 +58,7 @@ export class CartPage implements OnInit {
       this.loading.hide();
       if (data.success == 1) {
         this.shared.singleProductPageData.push(data.product_data[0]);
-        this.navCtrl.navigateForward(this.config.currentRoute + "product-detail/" + data.product_data[0].products_id);
+        this.navCtrl.navigateForward("tabs/home3/product-detail/" + data.product_data[0].products_id);
       }
     });
   }

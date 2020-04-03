@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, Events } from '@ionic/angular';
+import { NavController, Events, LoadingController } from '@ionic/angular';
 import { SharedDataService } from 'src/providers/shared-data/shared-data.service';
 import { ConfigService } from 'src/providers/config/config.service';
 
@@ -21,9 +21,11 @@ export class IntroPage implements OnInit {
     public navCtrl: NavController,
     public shared: SharedDataService,
     public config: ConfigService,
-    public events: Events, ) {
+    public events: Events,
+    public loadingController: LoadingController ) {
   }
   openHomePage() {
+    this.presentLoading();
     this.events.publish("openHomePage");
     this.config.checkingNewSettingsFromServer();
   }
@@ -32,5 +34,14 @@ export class IntroPage implements OnInit {
   }
   ngOnInit() {
   }
+ async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Please wait...',
+      duration: 3000
+    });
+    await loading.present();
 
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
+  }
 }

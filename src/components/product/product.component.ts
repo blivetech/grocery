@@ -76,7 +76,7 @@ export class ProductComponent implements OnInit {
         this.loading.hide();
         if (data.success == 1) {
           this.shared.singleProductPageData.push(data.product_data[0]);
-          this.navCtrl.navigateForward(this.config.currentRoute + "/product-detail/" + this.p.products_id);
+          this.navCtrl.navigateForward( "tabs/product-detail/" + this.p.products_id);
         }
       }, err => {
         console.log(err);
