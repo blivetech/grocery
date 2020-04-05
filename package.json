@@ -154,7 +154,7 @@
         "FACEBOOK_ANDROID_SDK_VERSION": "5.13.0"
       },
       "cordova-plugin-googleplus": {
-        "REVERSED_CLIENT_ID": "com.googleusercontent.apps.704066234948-5qiiqtfv1dkup7fbrrnfpqb7j1i0fgjk"
+        "REVERSED_CLIENT_ID": "704066234948-u5smqed432rqsu0q9mhovr1lkdssnr5a.apps.googleusercontent.com"
       }
     },
     "platforms": [
