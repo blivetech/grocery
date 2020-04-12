@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ApplicationRef } from '@angular/core';
 
 
 import { ConfigService } from 'src/providers/config/config.service';
@@ -22,6 +22,8 @@ export class ShippingAddressPage implements OnInit {
     public shared: SharedDataService,
     public modalCtrl: ModalController,
     public loading: LoadingService,
+    private applicationRef: ApplicationRef,
+
     public userAddress: UserAddressService, ) {
     if (this.shared.orderDetails.guest_status == 0) {
       this.getUserAddress();
@@ -83,7 +85,22 @@ export class ShippingAddressPage implements OnInit {
     return await modal.present();
   }
   submit() {
-    this.navCtrl.navigateForward(this.config.currentRoute + "/billing-address");
+    this.shared.orderDetails.billing_firstname = this.shared.orderDetails.delivery_firstname;
+    this.shared.orderDetails.billing_lastname = this.shared.orderDetails.delivery_lastname;
+    this.shared.orderDetails.billing_state = this.shared.orderDetails.delivery_state;
+    this.shared.orderDetails.billing_city = this.shared.orderDetails.delivery_city;
+    this.shared.orderDetails.billing_postcode = this.shared.orderDetails.delivery_postcode;
+    this.shared.orderDetails.billing_zone = this.shared.orderDetails.delivery_zone;
+    this.shared.orderDetails.billing_country = this.shared.orderDetails.delivery_country;
+    this.shared.orderDetails.billing_country_id = this.shared.orderDetails.delivery_country_id;
+    this.shared.orderDetails.billing_street_address = this.shared.orderDetails.delivery_street_address;
+    this.shared.orderDetails.billing_phone = this.shared.orderDetails.delivery_phone;
+    this.shared.orderDetails.total_tax = '0';
+    this.shared.orderDetails.shipping_cost = '0';
+    this.shared.orderDetails.shipping_method = 'Free Delivery(flateRate)';
+    this.navCtrl.navigateForward(this.config.currentRoute + "/order");
+    //this.navCtrl.navigateForward(this.config.currentRoute + "/shipping-method");
+    this.applicationRef.tick();
   }
 
   ngOnInit() {

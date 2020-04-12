@@ -86,10 +86,13 @@ export class LoginPage implements OnInit {
   }
 
   googleLogin() {
-    this.loading.autoHide(500);
-    this.googlePlus.login({})
+    this.loading.autoHide(500); 
+    this.googlePlus.login({
+      'webClientId':'com.googleusercontent.apps.704066234948-507edpqvf92m1ac3pqk2gc6kptoc7n0j',
+      'offline': true
+    })
       .then(res => {
-        //  alert(JSON.stringify(res))
+          alert(JSON.stringify(res))
         this.createAccount(res, 'google');
       })
       .catch(err => this.shared.showAlert(JSON.stringify(err)));

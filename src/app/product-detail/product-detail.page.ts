@@ -63,7 +63,7 @@ export class ProductDetailPage implements OnInit {
 
     this.pId = this.activatedRoute.snapshot.paramMap.get('id');
     this.product = JSON.parse(JSON.stringify(this.getProductData(this.pId)));
-    // console.log(this.product);
+     console.log(this.product);
     this.discount_price = this.product.discount_price;
     this.product_price = this.product.products_price;
     this.flash_price = this.product.flash_price;
@@ -206,14 +206,16 @@ export class ProductDetailPage implements OnInit {
     this.loading.autoHide(1000);
     // Share via email
     this.socialSharing.share(
-      this.product.products_name,
-      this.product.products_name,
-      this.config.url + this.product.products_image,
-      this.product.products_url).then(() => {
+      "Hi... i fount some awesome product " + this.product.products_name+','+this.config.yourSiteUrl + '/'+this.product.products_image,'','',
+     ' App link '+"https://play.google.com/store/apps/details?id=com.smartindia.grocery").then((res) => {
         // Success!
-      }).catch(() => {
+        console.log(JSON.stringify(res));
+      }).catch((err) => {
+        console.log(err);
         // Error!
       });
+
+
 
   }
   async clickWishList() {

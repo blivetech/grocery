@@ -10,6 +10,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { PayPal, PayPalPayment, PayPalConfiguration } from '@ionic-native/paypal/ngx';
 import { Stripe } from '@ionic-native/stripe/ngx';
 declare var braintree;
+declare var RazorpayCheckout: any;
+
 @Component({
   selector: 'app-order',
   templateUrl: './order.page.html',
@@ -54,13 +56,13 @@ export class OrderPage implements OnInit {
     public iab: InAppBrowser,
     private payPal: PayPal,
     private stripe: Stripe, ) {
-
+      
   }
 
   //============================================================================================  
   //placing order
   addOrder(nonce) {
-    this.loading.autoHide(5000);
+    this.loading.show();
     this.orderDetail.customers_id = this.shared.customerData.customers_id;
     this.orderDetail.customers_name = this.shared.orderDetails.delivery_firstname + " " + this.shared.orderDetails.delivery_lastname;
     this.orderDetail.delivery_name = this.shared.orderDetails.billing_firstname + " " + this.shared.orderDetails.billing_lastname;
@@ -90,15 +92,21 @@ export class OrderPage implements OnInit {
     console.log(dat);
     this.config.postHttp('addtoorder', dat).then((data: any) => {
       //this.loading.hide();
+      console.log(JSON.stringify(data))
+   
       if (data.success == 1) {
         this.shared.emptyCart();
         this.products = [];
         this.orderDetail = {};
         //this.shared.orderDetails = {};
+        this.loading.hide();
         this.navCtrl.navigateRoot(this.config.currentRoute + "/thank-you");
       }
-      if (data.success == 0) { this.shared.showAlert(data.message); }
+      if (data.success == 0) { 
+        this.loading.hide();
+        this.shared.showAlert(data.message); }
     }, err => {
+      this.loading.hide();
       this.shared.showAlert("Server Error" + " " + err.status);
     });
   };
@@ -109,11 +117,15 @@ export class OrderPage implements OnInit {
     dat.currency_code = this.config.currecnyCode;
     this.config.postHttp('getpaymentmethods', dat).then((data: any) => {
       //  this.loading.hide();
+      console.log(JSON.stringify(data));
       if (data.success == 1) {
         this.paymentMethods = data.data;
         for (let a of data.data) {
           // if (a.method == "braintree_card" && a.active == '1') { this.getToken(); }
           // if (a.method == "braintree_paypal" && a.active == '1') { this.getToken(); }
+          if (a.method == "paypal" && a.active == '1') {
+            
+          }
 
           if (a.method == "paypal" && a.active == '1') {
             this.paypalClientId = a.public_key;
@@ -516,6 +528,10 @@ export class OrderPage implements OnInit {
   paymentMehodChanged() {
     if (this.orderDetail.payment_method == "braintree_paypal") this.getToken();
     if (this.orderDetail.payment_method == "braintree_card") this.getToken();
+    if (this.orderDetail.payment_method == "paypal"){
+      this.payWithRazor();
+        this.orderDetail.payment_method = "Razor pay";
+    }
     //if (this.orderDetail.payment_method == "stripe") this.stripe.setPublishableKey(this.publicKeyStripe);
     this.scrollToBottom();
   }
@@ -528,6 +544,42 @@ export class OrderPage implements OnInit {
 
   }
 
+
+  payWithRazor() {
+    let paymentAmt = this.totalAmountWithDisocunt +'00';
+    let payamount:number = parseInt(paymentAmt);
+    var options = {
+      description: 'Credits towards consultation',
+      currency: "INR", // your 3 letter currency code
+      key: "rzp_test_ssM6ImvlHpDFph", // your Key Id from Razorpay dashboard
+      amount: payamount, // Payment amount in smallest denomiation e.g. cents for USD
+      name: this.shared.orderDetails.delivery_firstname ,
+      prefill: {
+        email:  this.orderDetail.email ,
+        contact: this.shared.orderDetails.delivery_phone,
+        name: this.shared.orderDetails.delivery_firstname
+      },
+      theme: {
+        color: '#F37254'
+      },
+      modal: {
+        ondismiss: function () {
+          alert('dismissed')
+        }
+      }
+    };
+
+    var successCallback = function (payment_id) {
+      alert('payment_id: ' + payment_id);
+      this.addOrder( payment_id);
+    };
+
+    var cancelCallback = function (error) {
+      alert(error.description + ' (Error ' + error.code + ')');
+    };
+
+    RazorpayCheckout.open(options, successCallback, cancelCallback);
+  }
   //================================= instamojo ===========================
 
   instamojoPayment() {

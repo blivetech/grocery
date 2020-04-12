@@ -15,8 +15,8 @@ export class BannerComponent implements OnInit {
   slideOptsOne = {
     initialSlide: 0,
     slidesPerView: 1,
-  //  autoplay:true,
- //   speed: 2000,
+    autoplay:true,
+    speed: 2000,
 
    };
   constructor(

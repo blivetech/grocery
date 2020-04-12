@@ -36,7 +36,7 @@
         </ion-col>
       </ion-row>
       <ion-row class="ion-no-padding">
-        <ion-button *ngIf="type=='recent'" color="danger" (click)="removeRecent()">{{'REMOVE'|translate}}</ion-button>
+        <ion-button *ngIf="type=='recent'" color="secondary" (click)="addToCart(p)">{{'ADD TO CART'|translate}}</ion-button>
         <ion-button *ngIf="type=='wishList'" color="danger" (click)="removeWishList()">{{'REMOVE'|translate}}
         </ion-button>
       </ion-row>
