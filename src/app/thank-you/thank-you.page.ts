@@ -25,8 +25,8 @@ export class ThankYouPage implements OnInit {
 
       this.presentToast("Please wait... It automatically redirect to homepage.");
     setTimeout(() => {
-
-      this.navCtrl.navigateRoot("tabs/" + this.config.getCurrentHomePage());
+   
+      this.navCtrl.navigateRoot("tabs/cart", { replaceUrl: true });
 
     }, 2500);
   

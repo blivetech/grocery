@@ -49,11 +49,11 @@ export class BillingAddressPage implements OnInit {
     }
   }
   submit() {
-    this.shared.orderDetails.total_tax = '0';
+    this.shared.orderDetails.total_tax = '5';
     this.shared.orderDetails.shipping_cost = '0';
     this.shared.orderDetails.shipping_method = 'Free Delivery(flateRate)';
     this.navCtrl.navigateForward(this.config.currentRoute + "/order");
-    //this.navCtrl.navigateForward(this.config.currentRoute + "/shipping-method");
+   // this.navCtrl.navigateForward(this.config.currentRoute + "/shipping-method");
     this.applicationRef.tick();
   }
 

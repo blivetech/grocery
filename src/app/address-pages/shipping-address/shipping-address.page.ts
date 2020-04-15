@@ -15,6 +15,8 @@ import { SelectZonesPage } from 'src/app/modals/select-zones/select-zones.page';
   styleUrls: ['./shipping-address.page.scss'],
 })
 export class ShippingAddressPage implements OnInit {
+  shippingMethod;
+  total_tax:number;
   constructor(
     public navCtrl: NavController,
     public config: ConfigService,
@@ -95,13 +97,17 @@ export class ShippingAddressPage implements OnInit {
     this.shared.orderDetails.billing_country_id = this.shared.orderDetails.delivery_country_id;
     this.shared.orderDetails.billing_street_address = this.shared.orderDetails.delivery_street_address;
     this.shared.orderDetails.billing_phone = this.shared.orderDetails.delivery_phone;
-    this.shared.orderDetails.total_tax = '0';
     this.shared.orderDetails.shipping_cost = '0';
     this.shared.orderDetails.shipping_method = 'Free Delivery(flateRate)';
-    this.navCtrl.navigateForward(this.config.currentRoute + "/order");
-    //this.navCtrl.navigateForward(this.config.currentRoute + "/shipping-method");
+
+    this.calculateTax();
+
+
+  
+  //  this.navCtrl.navigateForward(this.config.currentRoute + "/shipping-method");
     this.applicationRef.tick();
   }
+
 
   ngOnInit() {
   }
@@ -121,4 +127,85 @@ export class ShippingAddressPage implements OnInit {
     }
 
   }
+    calculateTax(){
+    this.loading.show();
+    var dat: { [k: string]: any } = {};
+    dat.tax_zone_id = this.shared.orderDetails.tax_zone_id;
+    // data.shipping_method = this.shared.orderDetails.shipping_method;
+    // data.shipping_method = 'upsShipping';
+    // data.shipping_method_code = this.shared.orderDetails.shipping_method_code;
+    dat.state = this.shared.orderDetails.delivery_state;
+    dat.city = this.shared.orderDetails.delivery_city;
+    dat.country_id = this.shared.orderDetails.delivery_country_id;
+    dat.postcode = this.shared.orderDetails.delivery_postcode;
+    dat.zone = this.shared.orderDetails.delivery_zone;
+    dat.street_address = this.shared.orderDetails.delivery_street_address;
+    
+    dat.products_weight = this.calculateWeight();
+    dat.products_weight_unit = 'g'
+    dat.products = this.getProducts();
+    dat.language_id = this.config.langId;
+    dat.currency_code = this.config.currecnyCode;
+    this.config.postHttp('getrate', dat).then((data: any) => {
+    
+      if (data.success == 1) {
+        try {
+          var m = data.data.shippingMethods;
+          console.log(m);
+          this.shippingMethod = Object.keys(m).map(function (key) { return m[key]; });
+          this.shared.orderDetails.total_tax = data.data.tax;
+          console.log( "tax::"+this.shared.orderDetails.total_tax );
+          setTimeout(() => {
+            this.navCtrl.navigateForward(this.config.currentRoute + "/order");
+          }, 1000);
+          this.loading.hide();
+        } catch (error) {
+          console.log(JSON.stringify(error));
+        }
+       
+      }
+    });
+   
+   
+    }
+    //calcualting products total weight
+    calculateWeight = function () {
+      var pWeight = 0;
+      var totalWeight = 0;
+      for (let value of this.shared.cartProducts) {
+        pWeight = parseFloat(value.weight);
+        if (value.unit == 'kg') {
+          pWeight = parseFloat(value.weight) * 1000;
+        }
+        //  else {
+        totalWeight = totalWeight + (pWeight * value.customers_basket_quantity);
+        //   }
+        //  console.log(totalWeight);
+      }
+      return totalWeight;
+    };
+    setMethod(event) {
+     // this.selectedMethod = false;
+      let data = event.detail.value;
+      this.shared.orderDetails.shipping_cost = data.rate;
+      this.shared.orderDetails.shipping_method = data.name + '(' + data.shipping_method + ')';
+      console.log("cost:"+this.shared.orderDetails.shipping_cost);
+      console.log("method:"+this.shared.orderDetails.shipping_method);
+    }
+
+    getProducts() {
+      let temp = [];
+      this.shared.cartProducts.forEach(element => {
+        temp.push({
+          customers_basket_quantity: element.customers_basket_quantity,
+          final_price: element.final_price,
+          price: element.price,
+          products_id: element.products_id,
+          total: element.total,
+          unit: element.unit,
+          weight: element.weight
+        })
+      });
+      return temp;
+    }
 }

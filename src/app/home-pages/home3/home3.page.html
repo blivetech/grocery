@@ -63,15 +63,15 @@
     </ion-slide>
   </ion-slides>
  
-    <h4 style="text-align: center; margin: 10px; font-weight: bold;">
+    <!-- <h4 style="text-align: center; margin: 10px; font-weight: bold;">
       {{ 'Recently Viewed' | translate }}
     </h4>
-  <!-- recently viewed swipe slider -->
+  recently viewed swipe slider
   <ion-slides #recentSlider [options]="sliderConfig">
     <ion-slide *ngFor="let p of shared.recentViewedProducts">
       <app-product [data]="p" [type]="'recent'"></app-product>
     </ion-slide>
-  </ion-slides>
+  </ion-slides> -->
 
 
 </ion-content>

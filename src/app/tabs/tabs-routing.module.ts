@@ -71,7 +71,7 @@ const routes: Routes = [
         path: 'home4',
         children: [
           {
-            path: '', loadChildren: () => import('../home-pages/home4/home4.module').then(m => m.Home4PageModule)
+            path: '', loadChildren: () => import('../home-pages/home3/home3.module').then(m => m.Home3PageModule)
           },
           productDetailPage,
           productsPage

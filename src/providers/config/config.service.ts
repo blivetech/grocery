@@ -61,7 +61,7 @@ export class ConfigService {
   public notifTitle;
   public notifDuration;
   public footerShowHide;
-  public homePage = 1;
+  public homePage = 3;
   public categoryPage = 1;
   public siteUrl = '';
   public appName = '';

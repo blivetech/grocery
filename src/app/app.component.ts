@@ -38,16 +38,16 @@ export class AppComponent {
       url: 'home',
       img: 'assets/left-menu-icon/home.png',
       items: [
-        { name: "1", url: '/home', },
-        { name: "2", url: '/home2', },
+        { name: "1", url: '/home3', },
+        { name: "2", url: '/home3', },
         { name: "3", url: '/home3', },
-        { name: "4", url: '/home4', },
-        { name: "5", url: '/home5', },
-        { name: "6", url: '/home6', },
-        { name: "7", url: '/home7', },
-        { name: "8", url: '/home8', },
-        { name: "9", url: '/home9', },
-        { name: "10", url: '/home10', }
+        { name: "4", url: '/home3', },
+        { name: "5", url: '/home3', },
+        { name: "6", url: '/home3', },
+        { name: "7", url: '/home3', },
+        { name: "8", url: '/home3', },
+        { name: "9", url: '/home3', },
+        { name: "10", url: '/home3', }
       ],
       expanded: false
     },
@@ -295,16 +295,16 @@ export class AppComponent {
   }
 
   openHomePage() {
-    if (this.config.homePage == 1) { this.navCtrl.navigateForward("/tabs/home"); }
-    if (this.config.homePage == 2) { this.navCtrl.navigateForward("/tabs/home2"); }
+    if (this.config.homePage == 1) { this.navCtrl.navigateForward("/tabs/home3"); }
+    if (this.config.homePage == 2) { this.navCtrl.navigateForward("/tabs/home3"); }
     if (this.config.homePage == 3) { this.navCtrl.navigateForward("/tabs/home3"); }
-    if (this.config.homePage == 4) { this.navCtrl.navigateForward("/tabs/home4"); }
-    if (this.config.homePage == 5) { this.navCtrl.navigateForward("/tabs/home5"); }
-    if (this.config.homePage == 6) this.navCtrl.navigateForward("/tabs/home6");
-    if (this.config.homePage == 7) this.navCtrl.navigateForward("/tabs/home7");
-    if (this.config.homePage == 8) this.navCtrl.navigateForward("/tabs/home8");
-    if (this.config.homePage == 9) this.navCtrl.navigateForward("/tabs/home9");
-    if (this.config.homePage == 10) this.navCtrl.navigateForward("/tabs/home10");
+    if (this.config.homePage == 4) { this.navCtrl.navigateForward("/tabs/home3"); }
+    if (this.config.homePage == 5) { this.navCtrl.navigateForward("/tabs/home3"); }
+    if (this.config.homePage == 6) this.navCtrl.navigateForward("/tabs/home3");
+    if (this.config.homePage == 7) this.navCtrl.navigateForward("/tabs/home3");
+    if (this.config.homePage == 8) this.navCtrl.navigateForward("/tabs/home3");
+    if (this.config.homePage == 9) this.navCtrl.navigateForward("/tabs/home3");
+    if (this.config.homePage == 10) this.navCtrl.navigateForward("/tabs/home3");
   }
   openCategoryPage() {
     if (this.config.categoryPage == 1) { this.navCtrl.navigateForward("categories/0/0"); }

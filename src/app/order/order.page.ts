@@ -62,7 +62,8 @@ export class OrderPage implements OnInit {
   //============================================================================================  
   //placing order
   addOrder(nonce) {
-    this.loading.show();
+
+    this.loading.autoHide(15000);
     this.orderDetail.customers_id = this.shared.customerData.customers_id;
     this.orderDetail.customers_name = this.shared.orderDetails.delivery_firstname + " " + this.shared.orderDetails.delivery_lastname;
     this.orderDetail.delivery_name = this.shared.orderDetails.billing_firstname + " " + this.shared.orderDetails.billing_lastname;
@@ -99,8 +100,9 @@ export class OrderPage implements OnInit {
         this.products = [];
         this.orderDetail = {};
         //this.shared.orderDetails = {};
-        this.loading.hide();
         this.navCtrl.navigateRoot(this.config.currentRoute + "/thank-you");
+        this.loading.hide();
+        
       }
       if (data.success == 0) { 
         this.loading.hide();
