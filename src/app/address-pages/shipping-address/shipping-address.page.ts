@@ -147,15 +147,16 @@ export class ShippingAddressPage implements OnInit {
     dat.language_id = this.config.langId;
     dat.currency_code = this.config.currecnyCode;
     this.config.postHttp('getrate', dat).then((data: any) => {
-    
+    console.log(data);
       if (data.success == 1) {
         try {
           var m = data.data.shippingMethods;
-          console.log(m);
           this.shippingMethod = Object.keys(m).map(function (key) { return m[key]; });
-          this.shared.orderDetails.total_tax = data.data.tax;
+       //   this.shared.orderDetails.total_tax = data.data.tax;
           console.log( "tax::"+this.shared.orderDetails.total_tax );
           setTimeout(() => {
+            let taxdetails =  (this.config.totalCartPrice /100)*5;
+            this.shared.orderDetails.total_tax = String(taxdetails); 
             this.navCtrl.navigateForward(this.config.currentRoute + "/order");
           }, 1000);
           this.loading.hide();
@@ -189,8 +190,7 @@ export class ShippingAddressPage implements OnInit {
       let data = event.detail.value;
       this.shared.orderDetails.shipping_cost = data.rate;
       this.shared.orderDetails.shipping_method = data.name + '(' + data.shipping_method + ')';
-      console.log("cost:"+this.shared.orderDetails.shipping_cost);
-      console.log("method:"+this.shared.orderDetails.shipping_method);
+     
     }
 
     getProducts() {

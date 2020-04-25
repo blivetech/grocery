@@ -91,6 +91,7 @@ export class ConfigService {
   public onesignalSenderId = "704066234948";
   public appSettings: { [k: string]: any } = {};
   public currentRoute = "tabs/home";
+  public totalCartPrice ;
   constructor(
     public storage: Storage,
     public platform: Platform,

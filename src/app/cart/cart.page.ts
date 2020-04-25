@@ -104,6 +104,7 @@ export class CartPage implements OnInit {
       return await modal.present();
     }
     else {
+      this.config.totalCartPrice = this.total;
       this.navCtrl.navigateForward(this.config.currentRoute + "/shipping-address");
     }
   }

@@ -1,11 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Events, IonSlides } from '@ionic/angular';
+import { Events, IonSlides, AlertController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 import { SharedDataService } from 'src/providers/shared-data/shared-data.service';
 import { ConfigService } from 'src/providers/config/config.service';
 import { HttpClient } from '@angular/common/http';
 import { LoadingService } from 'src/providers/loading/loading.service';
 import { Router } from '@angular/router';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
+
 
 @Component({
   selector: 'app-home3',
@@ -13,6 +16,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./home3.page.scss'],
 })
 export class Home3Page implements OnInit {
+  getMyCity:any;
   sliderConfig = {
     slidesPerView: this.config.productSlidesPerPage,
     spaceBetween: 0
@@ -28,7 +32,10 @@ export class Home3Page implements OnInit {
     public loading: LoadingService,
     public shared: SharedDataService,
     public route: Router,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    public alertController: AlertController,
+    private geolocation: Geolocation,
+    private nativeGeocoder: NativeGeocoder
   ) { 
 
   }
@@ -46,7 +53,46 @@ export class Home3Page implements OnInit {
   }
   ionViewDidEnter() {
     this.shared.hideSplashScreen();
+    console.log(localStorage.getItem('getMyCity'))
+    if(localStorage.getItem('getMyCity') == "" || localStorage.getItem('getMyCity')=== null){
+      this.selectCityPrompt();
+    }
+
+
   }
+
+  /** for feature development get city name */
+
+  // getLocation(value:string){
+  //  console.log(value);
+  //  if(value == 'gpsloc'){
+  //    console.log('eeee');
+  //   this.geolocation.getCurrentPosition().then((resp) => {
+  //     // resp.coords.latitude
+  //     // resp.coords.longitude
+  //     let options: NativeGeocoderOptions = {
+  //       useLocale: true,
+  //       maxResults: 5
+  //   };
+  //   this.nativeGeocoder.reverseGeocode(resp.coords.latitude, resp.coords.longitude, options)
+  //     .then((result: NativeGeocoderResult[]) => {
+  //       console.log(JSON.stringify(result[0]));
+  //       localStorage.setItem('getMyCity',JSON.stringify(result[0]));
+  //       this.getMyCity = JSON.stringify(result[0]);
+
+  //       if(this.getMyCity != 'valsad'){
+  //         this.shared.toast('We are not available in your city. When Smart India Grocery launches in your location you will get a notification.');
+  //         this.showPromt();
+  //       }
+  //     })
+  //     .catch((error: any) => console.log(error));
+  //    }).catch((error) => {
+  //      console.log('Error getting location', error);
+  //    });
+  //  }else if(value == 'apiloc'){
+  //     this.selectCityPrompt();
+  //  }
+  // }
 
   getSearchData = function () {
 
@@ -80,4 +126,80 @@ export class Home3Page implements OnInit {
 
   }
 
-}
+  // async showPromt(){
+  //     const alert = await this.alertController.create({
+  //       header: 'Select Location',
+  //       inputs: [
+        
+  //         {
+  //           name: 'radio',
+  //           type: 'radio',
+  //           label: 'Get Current Location',
+  //           value: 'gpsloc'
+  //         },
+  //         {
+  //           name: 'radio1',
+  //           type: 'radio',
+  //           label: 'Select Location',
+  //           value: 'apiloc'
+  //         }
+  //       ],
+  //       buttons: [
+  //         {
+  //           text: 'Cancel',
+  //           role: 'cancel',
+  //           cssClass: 'secondary',
+  //           handler: () => {
+  //             console.log('Confirm Cancel');
+  //           }
+  //         }, {
+  //           text: 'Continue',
+  //           handler: data => {
+  //             this.getLocation(data);
+              
+  //           }
+  //         }
+  //       ]
+  //     });
+  
+  //     await alert.present();
+  //   }
+
+    async selectCityPrompt(){
+      const alert = await this.alertController.create({
+        header: 'Choose City',
+        inputs: [
+        
+          {
+            name: 'radio',
+            type: 'radio',
+            label: 'Valsad',
+            value: 'valsad'
+          }
+          
+        ],
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: () => {
+              console.log('Confirm Cancel');
+            }
+          }, {
+            text: 'Continue',
+            handler: data => {
+            //  this.getLocation(JSON.stringify(data));
+            localStorage.setItem('getMyCity',data);
+              this.getMyCity = data;
+              this.ionViewDidEnter();
+            }
+          }
+        ]
+      });
+  
+      await alert.present();
+    }
+  }
+
+

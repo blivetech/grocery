@@ -1,15 +1,27 @@
 <ion-content class="ion-padding-bottom ">
-  <h2 style="margin: 15px;font-weight: 900;">Home</h2>
+  <ion-row>
+    <ion-col>
+    <h2 style="margin: 15px;font-weight: 900;">Home</h2>
+  </ion-col>
+  <ion-col class="ion-align-self-end">
+    <ion-img style="margin: 15px; height: 30px;width: 30px;" float-right  (click)="selectCityPrompt()" src='assets/placeholder.png'>{{getMyCity}}</ion-img>
+  </ion-col>
+  </ion-row>
+
     <ion-searchbar [(ngModel)]="search" name="search" placeholder="{{'Search'|translate}}" (click)="productSearch()">
     </ion-searchbar>
 
   <app-banner></app-banner>
+
+  <ion-img style="margin: 5px;" src='assets/ban_one.png'></ion-img>
 
   <!-- Flash sale items products -->
   <h4 style="text-align: center; margin: 10px; font-weight: bold;">
     Shop by category
   </h4>
   <app-categories [type]="'grid'"></app-categories>
+   <ion-img style="margin-top: 5px;" src='assets/ban_two.png'></ion-img>
+
 
   <div class="module" *ngIf="shared.flashSaleProducts.length!=0">
       <h4 style="text-align: center; margin: 10px; font-weight: bold;">
