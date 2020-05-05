@@ -1,5 +1,5 @@
 import { Component, OnInit, ApplicationRef, ViewChild } from '@angular/core';
-import { NavController, ActionSheetController, IonContent } from '@ionic/angular';
+import { NavController, ActionSheetController, IonContent, AlertController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { ConfigService } from 'src/providers/config/config.service';
 import { SharedDataService } from 'src/providers/shared-data/shared-data.service';
@@ -23,7 +23,7 @@ export class OrderPage implements OnInit {
 
   amount;
   instamojoClient;
-
+  otp;
   c;
   orderDetail: { [k: string]: any } = {};//include shipping address, billing address,  shipping methods.
   products = [];
@@ -40,7 +40,7 @@ export class OrderPage implements OnInit {
     expYear: 2020,
     cvc: ''
   };
-
+ getprice = '';
   paymentMethods = [];
   paypalClientId = "";
   paypalEnviroment = "";
@@ -55,14 +55,19 @@ export class OrderPage implements OnInit {
     public actionSheetCtrl: ActionSheetController,
     public iab: InAppBrowser,
     private payPal: PayPal,
+    public alertController: AlertController,
     private stripe: Stripe, ) {
       
+  }
+  ionViewWillEnter(){
+    this.otp = this.getRandomInt(100000,999999);
+    localStorage.setItem('otp',this.otp);
   }
 
   //============================================================================================  
   //placing order
   addOrder(nonce) {
-
+ if(this.totalAmountWithDisocunt )
     this.loading.autoHide(20000);
     this.orderDetail.customers_id = this.shared.customerData.customers_id;
     this.orderDetail.customers_name = this.shared.orderDetails.delivery_firstname + " " + this.shared.orderDetails.delivery_lastname;
@@ -89,13 +94,17 @@ export class OrderPage implements OnInit {
     this.orderDetail.nonce = nonce;
     this.orderDetail.language_id = this.config.langId;
     this.orderDetail.currency_code = this.config.currecnyCode;
+    this.orderDetail.otp = localStorage.getItem('otp');
     var dat = this.orderDetail;
+    console.log(JSON.stringify(dat));
     this.config.postHttp('addtoorder', dat).then((data: any) => {
       //this.loading.hide();
       console.log(JSON.stringify(data))
    
       if (data.success == 1) {
+       // this.sendsms()
         this.shared.emptyCart();
+        this.sendsms(data.otp);
         this.products = [];
         this.orderDetail = {};
         //this.shared.orderDetails = {};
@@ -178,6 +187,10 @@ export class OrderPage implements OnInit {
       var subtotal = parseFloat(value.total);
       a = a + subtotal;
     }
+
+    setTimeout(() => {
+      this.checkAmount(a);
+    }, 1000);
 
     let b = parseFloat(this.orderDetail.total_tax.toString());
     let c = parseFloat(this.orderDetail.shipping_cost.toString());
@@ -630,6 +643,8 @@ export class OrderPage implements OnInit {
 
     this.calculateTotal();
     this.initializePaymentMethods();
+    
+  
 
   }
   openHomePage() {
@@ -638,4 +653,68 @@ export class OrderPage implements OnInit {
   hyperpayPayment() {
     this.addOrder("null");
   }
+
+  checkAmount(getamount){
+    if(getamount >= 100){
+      //this.presentAlertConfirm();
+    }else if(getamount >= 1000){
+      this.congratsPrompt('your eligible for free shipping..')
+    }
+    else {
+      this.presentAlertConfirm();
+    }
+  }
+
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      header: 'Oops!',
+      message: '<strong>Your order amount is less than 100. please purchase minimum 100 or more amount to process this order.</strong>!!!',
+      buttons: [
+        {
+          text: 'Okay',
+          handler: () => {
+            this.navCtrl.navigateRoot("tabs/cart", { replaceUrl: true });
+
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async congratsPrompt(message:any) {
+    const alert = await this.alertController.create({
+      header: 'Congrats !',
+      message: '<strong>'+message+'</strong>!!!',
+      buttons: [
+        {
+          text: 'Okay',
+          handler: () => {
+            //this.navCtrl.navigateRoot("tabs/cart", { replaceUrl: true });
+
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+  sendsms(otp){
+   
+    this.httpClient.get('http://bulksms.smartsmssolution.in/Api.aspx?usr=bhumi&pwd=SmartIndia@2017&smstype=TextSMS&to='+ this.orderDetail.customers_telephone+'&msg=Please%20share%20the%20otp%20in%20delivery%20boy.%20your%20otp%20is%20'+ otp+'%20&rout=transactional&from=GROCRY').subscribe((res)=>{
+      console.log('send sms')        
+
+    });
+  }
+
+
+  getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+  
 }

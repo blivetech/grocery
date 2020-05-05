@@ -8,6 +8,8 @@ import { LoadingService } from 'src/providers/loading/loading.service';
 import { Router } from '@angular/router';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
+import { HTTP } from '@ionic-native/http/ngx';
+import { AppVersion } from '@ionic-native/app-version/ngx';
 
 
 @Component({
@@ -35,9 +37,10 @@ export class Home3Page implements OnInit {
     public navCtrl: NavController,
     public alertController: AlertController,
     private geolocation: Geolocation,
-    private nativeGeocoder: NativeGeocoder
+    private nativeGeocoder: NativeGeocoder,
+    private appVersion : AppVersion
   ) { 
-
+      
   }
   onChangeKeyword = function (e) {
     //console.log(this.search);
@@ -52,12 +55,14 @@ export class Home3Page implements OnInit {
   ngOnInit() {
   }
   ionViewDidEnter() {
+
+    
+    this.getAppVersion();
     this.shared.hideSplashScreen();
     console.log(localStorage.getItem('getMyCity'))
     if(localStorage.getItem('getMyCity') == "" || localStorage.getItem('getMyCity')=== null){
       this.selectCityPrompt();
     }
-
 
   }
 
@@ -200,6 +205,52 @@ export class Home3Page implements OnInit {
   
       await alert.present();
     }
+
+    getAppVersion(){
+      this.appVersion.getVersionNumber().then(value => {
+        console.log(value)
+        this.checkappversion(value);
+      }).catch(err => {
+        alert(err);
+      });
+    }
+    
+    checkappversion(version){
+      let varray:any = [];
+       this.http.get('http://ambaji.sunfloweebiztech.com/appversion.php').subscribe((res)=>{
+        console.log(JSON.stringify(res));
+        varray = res;
+        console.log('ee'+version);
+        console.log('ee'+varray.version);
+        if(version != varray.version){
+          this.versioPrompt();
+        }
+      });
+    }
+
+ 
+  
+
+  async versioPrompt(){
+      const alert = await this.alertController.create({
+        header: 'New update available',
+        message: 'New version available in play store. please update',
+        buttons: [ {
+          text: 'UPDATE',
+          role: 'update',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+            window.open("https://play.google.com/store/apps/details?id=com.smartindia.grocery&hl=en","_system");
+            this.ionViewDidEnter();
+          }
+        }],backdropDismiss:false
+      });
+  
+      await alert.present();
+    
+  }
+
   }
 
 

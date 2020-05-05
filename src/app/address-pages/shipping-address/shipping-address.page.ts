@@ -3,7 +3,7 @@ import { Component, OnInit, ApplicationRef } from '@angular/core';
 
 import { ConfigService } from 'src/providers/config/config.service';
 import { SharedDataService } from 'src/providers/shared-data/shared-data.service';
-import { ModalController, NavController } from '@ionic/angular';
+import { ModalController, NavController, AlertController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { LoadingService } from 'src/providers/loading/loading.service';
 import { UserAddressService } from 'src/providers/user-address/user-address.service';
@@ -23,6 +23,7 @@ export class ShippingAddressPage implements OnInit {
     public http: HttpClient,
     public shared: SharedDataService,
     public modalCtrl: ModalController,
+    public alertController: AlertController,
     public loading: LoadingService,
     private applicationRef: ApplicationRef,
 
@@ -87,25 +88,40 @@ export class ShippingAddressPage implements OnInit {
     return await modal.present();
   }
   submit() {
-    this.shared.orderDetails.billing_firstname = this.shared.orderDetails.delivery_firstname;
-    this.shared.orderDetails.billing_lastname = this.shared.orderDetails.delivery_lastname;
-    this.shared.orderDetails.billing_state = this.shared.orderDetails.delivery_state;
-    this.shared.orderDetails.billing_city = this.shared.orderDetails.delivery_city;
-    this.shared.orderDetails.billing_postcode = this.shared.orderDetails.delivery_postcode;
-    this.shared.orderDetails.billing_zone = this.shared.orderDetails.delivery_zone;
-    this.shared.orderDetails.billing_country = this.shared.orderDetails.delivery_country;
-    this.shared.orderDetails.billing_country_id = this.shared.orderDetails.delivery_country_id;
-    this.shared.orderDetails.billing_street_address = this.shared.orderDetails.delivery_street_address;
-    this.shared.orderDetails.billing_phone = this.shared.orderDetails.delivery_phone;
-    this.shared.orderDetails.shipping_cost = '0';
-    this.shared.orderDetails.shipping_method = 'Free Delivery(flateRate)';
-
-    this.calculateTax();
-
-
+    console.log(this.shared.orderDetails.delivery_postcode);
+    if(this.shared.orderDetails.delivery_postcode == '396001' || this.shared.orderDetails.delivery_postcode == '396125' || this.shared.orderDetails.delivery_postcode == '396375' || this.shared.orderDetails.delivery_postcode == '396020'){
+      this.shared.orderDetails.billing_firstname = this.shared.orderDetails.delivery_firstname;
+      this.shared.orderDetails.billing_lastname = this.shared.orderDetails.delivery_lastname;
+      this.shared.orderDetails.billing_state = this.shared.orderDetails.delivery_state;
+      this.shared.orderDetails.billing_city = this.shared.orderDetails.delivery_city;
+      this.shared.orderDetails.billing_postcode = this.shared.orderDetails.delivery_postcode;
+      this.shared.orderDetails.billing_zone = this.shared.orderDetails.delivery_zone;
+      this.shared.orderDetails.billing_country = this.shared.orderDetails.delivery_country;
+      this.shared.orderDetails.billing_country_id = this.shared.orderDetails.delivery_country_id;
+      this.shared.orderDetails.billing_street_address = this.shared.orderDetails.delivery_street_address;
+      this.shared.orderDetails.billing_phone = this.shared.orderDetails.delivery_phone;
+      console.log('true');
+      if( this.config.totalCartPrice >= 1000){
+        this.shared.orderDetails.shipping_cost = '0';
+        this.shared.orderDetails.shipping_method = 'Free Shipping';
+      }else {
+        this.shared.orderDetails.shipping_cost = '15';
+        this.shared.orderDetails.shipping_method = 'Standard Delivery';
+      }
+      
+     
   
-  //  this.navCtrl.navigateForward(this.config.currentRoute + "/shipping-method");
-    this.applicationRef.tick();
+      this.calculateTax();
+  
+  
+    
+    //  this.navCtrl.navigateForward(this.config.currentRoute + "/shipping-method");
+      this.applicationRef.tick();
+    }else{
+      console.log('false');
+        this.presentAlertConfirm();
+    }
+ 
   }
 
 
@@ -208,4 +224,24 @@ export class ShippingAddressPage implements OnInit {
       });
       return temp;
     }
+
+    async presentAlertConfirm() {
+      const alert = await this.alertController.create({
+        header: 'Oops !',
+        message: '<strong>We are not able to deliver your pincode at this time. sorry for the inconvenience </strong>!!!',
+        buttons: [
+          {
+            text: 'Okay',
+            handler: () => {
+              this.navCtrl.navigateRoot("tabs/cart", { replaceUrl: true });
+  
+              console.log('Confirm Okay');
+            }
+          }
+        ]
+      });
+  
+      await alert.present();
+    }
+  
 }

@@ -463,7 +463,6 @@ export class SharedDataService {
 
      //alert(JSON.stringify(data));
     this.config.postHttp("registerdevices", data).then(data => {
-        alert(registrationId + " " + JSON.stringify(data));
     });
     //  });
 
