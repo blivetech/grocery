@@ -180,6 +180,41 @@ export class Home3Page implements OnInit {
             type: 'radio',
             label: 'Valsad',
             value: 'valsad'
+          }, {
+            name: 'radio',
+            type: 'radio',
+            label: 'Vapi',
+            value: 'vapi'
+          }, {
+            name: 'radio',
+            type: 'radio',
+            label: 'Billimora',
+            value: 'billimora'
+          }, {
+            name: 'radio',
+            type: 'radio',
+            label: 'Chikhli',
+            value: 'chikhli'
+          }, {
+            name: 'radio',
+            type: 'radio',
+            label: 'Surat',
+            value: 'surat'
+          }, {
+            name: 'radio',
+            type: 'radio',
+            label: 'Ahmedabad',
+            value: 'ahmedabad'
+          }, {
+            name: 'radio',
+            type: 'radio',
+            label: 'Vadodara',
+            value: 'vadodara'
+          }, {
+            name: 'radio',
+            type: 'radio',
+            label: 'Kalol',
+            value: 'kalol'
           }
           
         ],

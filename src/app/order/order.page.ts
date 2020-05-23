@@ -9,6 +9,9 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 //import Instamojo from 'instamojo-nodejs';
 import { PayPal, PayPalPayment, PayPalConfiguration } from '@ionic-native/paypal/ngx';
 import { Stripe } from '@ionic-native/stripe/ngx';
+import * as sha512 from 'js-sha512';
+
+
 declare var braintree;
 declare var RazorpayCheckout: any;
 
@@ -560,7 +563,7 @@ export class OrderPage implements OnInit {
     let paymentAmt = this.totalAmountWithDisocunt +'00';
     let payamount:number = parseInt(paymentAmt);
     var options = {
-      description: 'Credits towards consultation',
+      description: '1',
       currency: "INR", // your 3 letter currency code
       key: "rzp_test_ssM6ImvlHpDFph", // your Key Id from Razorpay dashboard
       amount: payamount, // Payment amount in smallest denomiation e.g. cents for USD

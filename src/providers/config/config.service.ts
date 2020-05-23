@@ -228,7 +228,7 @@ export class ConfigService {
     });
   }
   defaultSettings() {
-    this.fbId = this.appSettings.facebook_app_id;
+    this.fbId = '943385676119773';
     this.address = this.appSettings.address + ', ' + this.appSettings.city + ', ' + this.appSettings.state + ' ' + this.appSettings.zip + ', ' + this.appSettings.country;
     this.email = this.appSettings.contact_us_email;
     this.latitude = this.appSettings.latitude;

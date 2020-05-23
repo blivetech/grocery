@@ -89,7 +89,7 @@ export class ShippingAddressPage implements OnInit {
   }
   submit() {
     console.log(this.shared.orderDetails.delivery_postcode);
-    if(this.shared.orderDetails.delivery_postcode == '396001' || this.shared.orderDetails.delivery_postcode == '396125' || this.shared.orderDetails.delivery_postcode == '396375' || this.shared.orderDetails.delivery_postcode == '396020'){
+   // if(this.shared.orderDetails.delivery_postcode == '396001' || this.shared.orderDetails.delivery_postcode == '396125' || this.shared.orderDetails.delivery_postcode == '396375' || this.shared.orderDetails.delivery_postcode == '396020'){
       this.shared.orderDetails.billing_firstname = this.shared.orderDetails.delivery_firstname;
       this.shared.orderDetails.billing_lastname = this.shared.orderDetails.delivery_lastname;
       this.shared.orderDetails.billing_state = this.shared.orderDetails.delivery_state;
@@ -117,10 +117,10 @@ export class ShippingAddressPage implements OnInit {
     
     //  this.navCtrl.navigateForward(this.config.currentRoute + "/shipping-method");
       this.applicationRef.tick();
-    }else{
-      console.log('false');
-        this.presentAlertConfirm();
-    }
+    // }else{
+    //   console.log('false');
+    //     this.presentAlertConfirm();
+    // }
  
   }
 

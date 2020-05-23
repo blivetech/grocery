@@ -26,7 +26,7 @@
     "@ionic-native/deeplinks": "^5.12.0",
     "@ionic-native/device": "^5.15.0",
     "@ionic-native/email-composer": "^5.13.0",
-    "@ionic-native/facebook": "^5.23.0",
+    "@ionic-native/facebook": "^5.25.0",
     "@ionic-native/fcm": "^5.15.0",
     "@ionic-native/geolocation": "^5.24.0",
     "@ionic-native/google-plus": "^5.22.0-beta-1",
@@ -49,6 +49,7 @@
     "card.io.cordova.mobilesdk": "^2.1.0",
     "com-sarriaroman-photoviewer": "^1.2.4",
     "com.paypal.cordova.mobilesdk": "^3.5.0",
+    "com.payumoney.sdkui.cordova": "^1.2.1",
     "com.razorpay.cordova": "git+https://github.com/razorpay/razorpay-cordova.git",
     "cordova-android": "^8.1.0",
     "cordova-browser": "6.0.0",
@@ -81,6 +82,8 @@
     "es6-promise-plugin": "^4.2.2",
     "instamojo-nodejs": "0.0.5",
     "jquery": "^3.4.1",
+    "js-sha256": "^0.9.0",
+    "js-sha512": "^0.8.0",
     "onesignal-cordova-plugin": "^2.6.0",
     "rxjs": "~6.5.1",
     "ts-md5": "^1.2.6",
@@ -156,7 +159,8 @@
         "WEB_APPLICATION_CLIENT_ID": "704066234948-mcmtougo2rq9hujct142n0ftceisccbb.apps.googleusercontent.com",
         "PLAY_SERVICES_VERSION": "15.0.1"
       },
-      "com.razorpay.cordova": {}
+      "com.razorpay.cordova": {},
+      "com.payumoney.sdkui.cordova": {}
     },
     "platforms": [
       "android",
