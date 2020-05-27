@@ -49,7 +49,6 @@
     "card.io.cordova.mobilesdk": "^2.1.0",
     "com-sarriaroman-photoviewer": "^1.2.4",
     "com.paypal.cordova.mobilesdk": "^3.5.0",
-    "com.payumoney.sdkui.cordova": "^1.2.1",
     "com.razorpay.cordova": "git+https://github.com/razorpay/razorpay-cordova.git",
     "cordova-android": "^8.1.0",
     "cordova-browser": "6.0.0",
@@ -159,12 +158,11 @@
         "WEB_APPLICATION_CLIENT_ID": "704066234948-mcmtougo2rq9hujct142n0ftceisccbb.apps.googleusercontent.com",
         "PLAY_SERVICES_VERSION": "15.0.1"
       },
-      "com.razorpay.cordova": {},
-      "com.payumoney.sdkui.cordova": {}
+      "com.razorpay.cordova": {}
     },
     "platforms": [
-      "android",
-      "ios"
+      "ios",
+      "android"
     ]
   },
   "browser": {
