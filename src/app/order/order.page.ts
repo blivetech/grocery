@@ -1,5 +1,5 @@
 import { Component, OnInit, ApplicationRef, ViewChild } from '@angular/core';
-import { NavController, ActionSheetController, IonContent, AlertController } from '@ionic/angular';
+import { NavController, ActionSheetController, IonContent, AlertController, Platform } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { ConfigService } from 'src/providers/config/config.service';
 import { SharedDataService } from 'src/providers/shared-data/shared-data.service';
@@ -58,6 +58,7 @@ export class OrderPage implements OnInit {
     public actionSheetCtrl: ActionSheetController,
     public iab: InAppBrowser,
     private payPal: PayPal,
+    private platform: Platform,
     public alertController: AlertController,
     private stripe: Stripe, ) {
       
@@ -70,7 +71,7 @@ export class OrderPage implements OnInit {
   //============================================================================================  
   //placing order
   addOrder(nonce) {
- if(this.totalAmountWithDisocunt )
+  if(this.totalAmountWithDisocunt )
     this.loading.autoHide(20000);
     this.orderDetail.customers_id = this.shared.customerData.customers_id;
     this.orderDetail.customers_name = this.shared.orderDetails.delivery_firstname + " " + this.shared.orderDetails.delivery_lastname;
@@ -99,27 +100,28 @@ export class OrderPage implements OnInit {
     this.orderDetail.currency_code = this.config.currecnyCode;
     this.orderDetail.otp = localStorage.getItem('otp');
     var dat = this.orderDetail;
-    console.log(JSON.stringify(dat));
-    this.config.postHttp('addtoorder', dat).then((data: any) => {
-      //this.loading.hide();
-      console.log(JSON.stringify(data))
+    setTimeout(() => {
+      this.config.postHttp('addtoorder', dat).then((data: any) => {
+        //this.loading.hide();
+        if (data.success == 1) {
+         // this.sendsms()
+          this.shared.emptyCart();
+          this.sendsms(data.otp);
+          this.products = [];
+          this.orderDetail = {};
+          //this.shared.orderDetails = {};
+          this.navCtrl.navigateRoot(this.config.currentRoute + "/thank-you");
+          
+        }
+        if (data.success == 0) { 
+          this.shared.showAlert(data.message); }
+      }, err => {
+        this.shared.showAlert("Server Error" + " " + err.status);
+      });
+    }, 1000);
    
-      if (data.success == 1) {
-       // this.sendsms()
-        this.shared.emptyCart();
-        this.sendsms(data.otp);
-        this.products = [];
-        this.orderDetail = {};
-        //this.shared.orderDetails = {};
-        this.navCtrl.navigateRoot(this.config.currentRoute + "/thank-you");
-        
-      }
-      if (data.success == 0) { 
-        this.shared.showAlert(data.message); }
-    }, err => {
-      this.shared.showAlert("Server Error" + " " + err.status);
-    });
   };
+
   initializePaymentMethods() {
     // this.loading.show();
     var dat: { [k: string]: any } = {};
@@ -560,12 +562,15 @@ export class OrderPage implements OnInit {
 
 
   payWithRazor() {
-    let paymentAmt = this.totalAmountWithDisocunt +'00';
+   
+    let paymentAmt = this.totalAmountWithDisocunt.toFixed(0)+'00';
     let payamount:number = parseInt(paymentAmt);
+    console.log(payamount);
+
     var options = {
-      description: '1',
+      description: 'Get your awesome product',
       currency: "INR", // your 3 letter currency code
-      key: "rzp_test_ssM6ImvlHpDFph", // your Key Id from Razorpay dashboard
+      key: "rzp_live_1epD1I0ItWGK1h", // your Key Id from Razorpay dashboard
       amount: payamount, // Payment amount in smallest denomiation e.g. cents for USD
       name: this.shared.orderDetails.delivery_firstname ,
       prefill: {
@@ -578,21 +583,47 @@ export class OrderPage implements OnInit {
       },
       modal: {
         ondismiss: function () {
-          alert('dismissed')
+         // alert('dismissed')
         }
       }
     };
 
+    // var successCallback = function (payment_id) {
+    //  // alert('payment_id: ' + payment_id);
+    //   this.addOrder( payment_id);
+    //   console.log('success')
+    // };
+
+    // var cancelCallback = function (error) {
+    //   alert(error.description + ' (Error ' + error.code + ')');
+    // };
+
+    // RazorpayCheckout.open(options, successCallback, cancelCallback);
+
+    
+    let _this = this;
     var successCallback = function (payment_id) {
-      alert('payment_id: ' + payment_id);
-      this.addOrder( payment_id);
+      setTimeout(() => {
+        _this.addOrder(payment_id);
+      }, 1000);
     };
 
     var cancelCallback = function (error) {
-      alert(error.description + ' (Error ' + error.code + ')');
+      _this.shared.toast(error.description + ' (Error ' + error.code + ')');
     };
 
+
     RazorpayCheckout.open(options, successCallback, cancelCallback);
+    if (this.platform.is('android')) {
+      this.platform.resume.subscribe((event) => {
+        // Re-register the payment success and cancel callbacks
+        RazorpayCheckout.on('payment.success', successCallback)
+        RazorpayCheckout.on('payment.cancel', cancelCallback)
+        // Pass on the event to RazorpayCheckout
+        RazorpayCheckout.onResume(event);
+
+      })
+    };
   }
   //================================= instamojo ===========================
 
